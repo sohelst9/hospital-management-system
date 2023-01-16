@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Category;
 use App\Models\Admin\Labtest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
@@ -18,7 +19,15 @@ class LabTestController extends Controller
      */
     public function index()
     {
-        $labtests = Labtest::paginate(10);
+        $admin_id = Auth::guard('admin')->user()->id;
+        if(Auth::guard('admin')->user()->Is_admin == 1){
+            $labtests = Labtest::paginate(10);
+        }
+        else{
+           $category_id = Category::where('admin_id', $admin_id)->first();
+            $labtests = Labtest::where('category_id', $category_id?->id)->paginate();
+        }
+
         return view('admin.labtest.index', compact('labtests'));
     }
 
@@ -29,7 +38,7 @@ class LabTestController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::where('admin_id', Auth::guard('admin')->user()->id)->get();
         return view('admin.labtest.create', compact('categories'));
     }
 
@@ -41,6 +50,7 @@ class LabTestController extends Controller
      */
     public function store(Request $request)
     {
+        $admin_id = Auth::guard('admin')->user()->id;
         $request->validate([
             'name' => 'required',
             'category' => 'required',
@@ -57,6 +67,7 @@ class LabTestController extends Controller
             'slug' => Str::slug($request->name, '-'),
             'description' => $request->description,
             'thumbnail' => $file,
+            'admin_id'=>$admin_id
         ]);
         return redirect()->route('labtest.index')->with('success', 'New Lab Test Added !');
     }
@@ -81,7 +92,7 @@ class LabTestController extends Controller
     public function edit($id)
     {
         $labtest = Labtest::findOrFail($id);
-        $categories = Category::all();
+        $categories = Category::where('admin_id', Auth::guard('admin')->user()->id)->get();
         return view('admin.labtest.edit', compact('labtest', 'categories'));
     }
 

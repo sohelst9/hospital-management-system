@@ -14,4 +14,6 @@ class Category extends Model
     {
         return $this->belongsTo(Hospital::class, 'hospital_id');
     }
+
+    
 }

@@ -17,11 +17,33 @@
                         <form action="{{ route('hospital.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="name">Name <span class="text-danger">*</span></label>
+                                <label class="col-sm-2 col-form-label" for="name"> Hospital Name <span class="text-danger">*</span></label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="name" name="name"
                                         placeholder="Enter Hospital Name" />
                                     @error('name')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="email">Email <span class="text-danger">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        placeholder="Enter Hospital email" />
+                                    @error('email')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="phone">Contact Number</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="phone" name="phone"
+                                        placeholder="Enter Hospital phone" />
+                                    @error('phone')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -47,6 +69,28 @@
                                 <div class="col-sm-10">
                                     <input type="file" class="form-control" id="thumbnail" name="thumbnail" />
                                     @error('thumbnail')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="username">Username <span class="text-danger">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="username" name="username"
+                                        placeholder="Enter Hospital username" />
+                                    @error('username')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="password">Password <span class="text-danger">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="password" name="password"
+                                        placeholder="Enter Hospital password" />
+                                    @error('password')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>

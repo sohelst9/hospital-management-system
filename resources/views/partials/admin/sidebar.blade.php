@@ -65,6 +65,7 @@
         </li>
 
         <!-- Hospital List -->
+        @if(Auth::guard('admin')->user()->Is_admin == 1)
         <li class="menu-item {{ request()->routeIs('hospital.create') || request()->routeIs('hospital.index') || request()->routeIs('hospital.edit') ? 'active' : '' }} {{ request()->routeIs('hospital.create') || request()->routeIs('hospital.index') || request()->routeIs('hospital.edit') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
@@ -83,6 +84,7 @@
                 </li>
             </ul>
         </li>
+        @endif
         <!----end hospital------->
 
         <!-- Category List -->

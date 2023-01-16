@@ -28,7 +28,11 @@ id="layout-navbar"
     <li class="nav-item navbar-dropdown dropdown-user dropdown">
     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
         <div class="avatar avatar-online">
-        <img src="{{ asset('uploads/admin/'.Auth::guard('admin')->user()->image) }}" alt class="w-px-90 h-80 rounded-circle" />
+            @if (!Auth::guard('admin')->user()->image == null)
+            <img src="{{ asset('uploads/admin/'.Auth::guard('admin')->user()->image) }}" alt class="w-px-90 h-80 rounded-circle" />
+            @else
+            <img src="{{ asset('uploads/default.webp') }}" alt class="w-px-90 h-80 rounded-circle" />
+            @endif
         </div>
     </a>
     <ul class="dropdown-menu dropdown-menu-end">
@@ -37,7 +41,11 @@ id="layout-navbar"
             <div class="d-flex">
             <div class="flex-shrink-0 me-3">
                 <div class="avatar avatar-online">
-                <img src="{{ asset('uploads/admin/'.Auth::guard('admin')->user()->image) }}" alt class="w-px-90 h-80 rounded-circle" />
+               @if (!Auth::guard('admin')->user()->image == null)
+               <img src="{{ asset('uploads/admin/'.Auth::guard('admin')->user()->image) }}" alt class="w-px-90 h-80 rounded-circle" />
+               @else
+               <img src="{{ asset('uploads/default.webp') }}" alt class="w-px-90 h-80 rounded-circle" />
+               @endif
                 </div>
             </div>
             <div class="flex-grow-1">

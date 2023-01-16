@@ -14,7 +14,8 @@
                         </a>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('category.update', $category->id) }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row mb-3">
@@ -30,13 +31,11 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="name">Hospital <span class="text-danger">*</span></label>
+                                <label class="col-sm-2 col-form-label" for="name">Hospital <span
+                                        class="text-danger">*</span></label>
                                 <div class="col-sm-10">
                                     <select name="hospital" id="hospital" class="form-control">
-                                        <option value="">--select--</option>
-                                        @foreach ($hospitals as $hospital)
-                                            <option value="{{ $hospital->id }}" {{ $hospital->id == $category->hospital_id ? 'selected' : '' }}>{{ $hospital->name }}</option>
-                                        @endforeach
+                                        <option value="{{ $hospital->id }}">{{ $hospital->name }}</option>
                                     </select>
                                     @error('name')
                                         <p class="text-danger">{{ $message }}</p>
@@ -58,8 +57,7 @@
                                 <div class="col-sm-10">
                                     <input type="file" class="form-control" id="thumbnail" name="thumbnail" />
                                     @if ($category)
-                                        <img class="mt-2"
-                                            src="{{ asset('uploads/category/' . $category->thumbnail) }}"
+                                        <img class="mt-2" src="{{ asset('uploads/category/' . $category->thumbnail) }}"
                                             alt="" width="100">
                                     @endif
                                     @error('thumbnail')

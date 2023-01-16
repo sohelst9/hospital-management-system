@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('hospitals', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('admin_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('slug')->nullable();
             $table->text('sub_title')->nullable();

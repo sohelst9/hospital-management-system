@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Backend\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Admin;
 use App\Models\Admin\Hospital;
 use App\Models\Admin\HospitalGalleryImage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 
@@ -28,6 +30,9 @@ class HospitalController extends Controller
     {
         $request->validate([
             'name'=>'required',
+            'email'=>'required',
+            'username'=>'required',
+            'password'=>'required',
             'thumbnail'=>'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
         ]);
         if($request->hasfile('thumbnail')){
@@ -35,13 +40,25 @@ class HospitalController extends Controller
             $filePath =public_path('uploads/hospital/thumbnail');
             $request->file('thumbnail')->move($filePath,$file);
         }
-       Hospital::create([
+       $admin_id = Admin::insertGetId([
+            'username'=>$request->username,
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+            'password' => Hash::make($request->password),
+            'Is_admin'=>0,
+            'created_at'=>now()
+        ]);
+         Hospital::insert([
+           'admin_id'=>$admin_id,
             'name'=>$request->name,
             'slug'=>Str::slug($request->name, '-'),
             'sub_title'=>$request->subtitle,
             'description'=>$request->description,
             'thumbnail'=>$file,
+            'created_at'=>now()
         ]);
+
+
         return redirect()->route('hospital.index')->with('success', 'New Hospital Added !');
     }
 

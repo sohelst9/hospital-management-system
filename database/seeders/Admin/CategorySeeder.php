@@ -22,6 +22,7 @@ class CategorySeeder extends Seeder
             'slug'=>Str::slug('Blood tests', '-'),
             'description'=> 'Most blood tests only take a few minutes to complete and are carried out at your GP surgery or local hospital by a doctor, nurse or phlebotomist (a specialist in taking blood samples).',
             'thumbnail'=> 'blood.jpeg',
+            'admin_id'=> 2,
         ]);
     }
 }

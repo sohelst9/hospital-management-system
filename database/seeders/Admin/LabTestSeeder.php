@@ -22,6 +22,7 @@ class LabTestSeeder extends Seeder
             'slug'=>Str::slug('Lab Aid Hospital', '-'),
             'description'=> 'The test measures Hb (Hemoglobin), TC (Total count), DC (Differential count), and ESR(Erythrocyte Sedimentation Rate).It gives information about the general',
             'thumbnail'=> 'tc-dc.jpeg',
+            'admin_id'=> 1,
         ]);
     }
 }

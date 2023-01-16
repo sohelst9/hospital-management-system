@@ -31,10 +31,7 @@
                                 <label class="col-sm-2 col-form-label" for="name">Hospital <span class="text-danger">*</span></label>
                                 <div class="col-sm-10">
                                     <select name="hospital" id="hospital" class="form-control">
-                                        <option value="">--select--</option>
-                                        @foreach ($hospitals as $hospital)
-                                            <option value="{{ $hospital->id }}">{{ $hospital->name }}</option>
-                                        @endforeach
+                                            <option value="{{ $hospital?->id }}">{{ $hospital?->name }}</option>
                                     </select>
                                     @error('name')
                                         <p class="text-danger">{{ $message }}</p>

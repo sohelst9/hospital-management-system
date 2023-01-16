@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Category;
 use App\Models\Admin\Hospital;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
@@ -18,7 +19,14 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(10);
+        if(Auth::guard('admin')->user()->Is_admin == 1){
+            $categories = Category::paginate(10);
+        }
+        else{
+           $hospital_id = Hospital::where('admin_id', Auth::guard('admin')->user()->id)->first();
+            $categories = Category::where('hospital_id', $hospital_id?->id)->paginate();
+        }
+
         return view('admin.category.index', compact('categories'));
     }
 
@@ -29,8 +37,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $hospitals = Hospital::all();
-        return view('admin.category.create', compact('hospitals'));
+        $hospital = Hospital::where('admin_id', Auth::guard('admin')->user()->id)->first();
+        return view('admin.category.create', compact('hospital'));
     }
 
     /**
@@ -57,6 +65,7 @@ class CategoryController extends Controller
             'slug'=>Str::slug($request->name, '-'),
             'description'=>$request->description,
             'thumbnail'=>$file,
+            'admin_id'=>Auth::guard('admin')->user()->id,
         ]);
         return redirect()->route('category.index')->with('success', 'New Category Added !');
     }
@@ -80,9 +89,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $hospitals = Hospital::all();
+        $hospital = Hospital::where('admin_id', Auth::guard('admin')->user()->id)->first();
         $category = Category::findOrFail($id);
-        return view('admin.category.edit',compact('category', 'hospitals'));
+        return view('admin.category.edit',compact('category', 'hospital'));
     }
 
     /**
