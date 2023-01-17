@@ -11,32 +11,42 @@
                     <div class="row product-item-single">
                         <div class="col-sm-6">
                             <div class="single_product product__img">
-                                <img src="{{asset('uploads/labtest/'.$labtest->thumbnail)}}" class="zoomin" alt="product" loading="lazy">
+                                <img src="{{ asset('uploads/labtest/' . $labtest->thumbnail) }}" class="zoomin" alt="product"
+                                    loading="lazy">
                             </div><!-- /.product-img -->
                         </div>
                         <div class="col-sm-6">
-                            <h1 class="product__title">{{ $labtest->name }}</h1>
+                            <form action="{{route('cart.store')}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="labtest_id" value="{{$labtest->id}}">
+                                <input type="hidden" name="quantity" value="1">
+                                <h1 class="product__title">{{ $labtest->name }}</h1>
 
-                            <span class="product__price mb-20">{{ $labtest->name }} &#2547;</span>
-                            <div class="product__desc">
-                                <p>
-                                    {{ strip_tags(Str::limit($labtest->description, 200)) }}
-                                </p>
-                            </div><!-- /.product-desc -->
-                            <div class="product__quantity d-flex mb-30">
-                                <a class="btn btn__secondary btn__rounded" href="#">add to cart</a>
-                            </div><!-- /.product-quantity -->
-                            <div class="product__meta-details">
-                                <ul class="list-unstyled mb-30">
-                                    <li><span>Hospital :</span> <span>{{$hospital?->hospital->name}}</span></li>
-                                    <li><span>Category :</span> <span>{{ $category?->category->name }}</span></li>
-                                </ul>
-                            </div><!-- /.product__meta-details -->
-                            <ul class="social-icons list-unstyled mb-0">
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                            </ul><!-- /.social-icons -->
+                                <span class="product__price mb-20">{{ $labtest->price }} &#2547;</span>
+                                <div class="product__desc">
+                                    <p>
+                                        {{ strip_tags(Str::limit($labtest->description, 200)) }}
+                                    </p>
+                                </div><!-- /.product-desc -->
+                                <div class="product__quantity d-flex mb-30">
+                                    @auth
+                                        <button type="submit" class="btn btn__secondary btn__rounded">add to cart</button>
+                                    @else
+                                        <a href="{{ route('login') }}" class="btn btn__secondary btn__rounded">add to cart</a>
+                                    @endauth
+                                </div><!-- /.product-quantity -->
+                                <div class="product__meta-details">
+                                    <ul class="list-unstyled mb-30">
+                                        <li><span>Hospital :</span> <span>{{ $hospital?->hospital->name }}</span></li>
+                                        <li><span>Category :</span> <span>{{ $category?->category->name }}</span></li>
+                                    </ul>
+                                </div><!-- /.product__meta-details -->
+                                <ul class="social-icons list-unstyled mb-0">
+                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                </ul><!-- /.social-icons -->
+                            </form>
                         </div>
                     </div><!-- /.row -->
                     <div class="product__details mt-100">
@@ -52,23 +62,30 @@
                     <h6 class="related__products-title text-center-xs mb-25">Related Lab test</h6>
                     <div class="row">
                         @forelse ($related_tests as $related_test)
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="product-item">
-                                <div class="product__img">
-                                    <a href="{{route('single.labtest',$related_test->id)}}"><img src="{{asset('uploads/labtest/'.$related_test->thumbnail)}}" alt="Product" loading="lazy"></a>
-                                    <div class="product__action">
-                                        <a href="#" class="btn btn__primary btn__rounded">
-                                            <i class="icon-cart"></i> <span>Add To Cart</span>
-                                        </a>
-                                    </div><!-- /.product-action -->
-                                </div><!-- /.product-img -->
-                                <div class="product__info">
-                                    <h4 class="product__title"><a href="{{route('single.labtest',$related_test->id)}}">{{$related_test->name}}</a></h4>
-                                    <span class="product__price">{{$related_test->price}} &#2547;</span>
-                                </div><!-- /.product-content -->
-                            </div><!-- /.product-item -->
-                        </div><!-- /.col-lg-3 -->
+                            <div class="col-sm-6 col-md-6 col-lg-3">
+                                <div class="product-item">
+                                    <div class="product__img">
+                                        <a href="{{ route('single.labtest', $related_test->id) }}"><img
+                                                src="{{ asset('uploads/labtest/' . $related_test->thumbnail) }}"
+                                                alt="Product" loading="lazy"></a>
+                                        <div class="product__action">
+                                            <a href="#" class="btn btn__primary btn__rounded">
+                                                <i class="icon-cart"></i> <span>Add To Cart</span>
+                                            </a>
+                                        </div><!-- /.product-action -->
+                                    </div><!-- /.product-img -->
+                                    <div class="product__info">
+                                        <h4 class="product__title"><a
+                                                href="{{ route('single.labtest', $related_test->id) }}">{{ $related_test->name }}</a>
+                                        </h4>
+                                        <span class="product__price">{{ $related_test->price }} &#2547;</span>
+                                    </div><!-- /.product-content -->
+                                </div><!-- /.product-item -->
+                            </div><!-- /.col-lg-3 -->
                         @empty
+                            <div class="not_avilable">
+                                <h4 class="">Related Data Empty ! </h4>
+                            </div>
                         @endforelse
                     </div><!-- /.row -->
                 </div><!-- /.col-12 -->

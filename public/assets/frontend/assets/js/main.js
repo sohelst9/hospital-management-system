@@ -12,7 +12,7 @@
     03- Sticky Navbar
     04- Scroll Top Button
     05- Close Topbar
-    06- Set Background-img to section 
+    06- Set Background-img to section
     07- Add active class to accordions
     08- Contact Form validation
     09- Slick Carousel
@@ -20,7 +20,7 @@
     11- Progress bars
     12- NiceSelect Plugin
     13- Range Slider
-     
+
  ----------------------------*/
 
 $(function () {
@@ -33,7 +33,7 @@ $(function () {
     /*==========  Pre Loading   ==========*/
     setTimeout(function () {
         $(".preloader").remove();
-    }, 2000);
+    }, 20);
 
     /*==========   Mobile Menu   ==========*/
     $('.navbar-toggler').on('click', function () {

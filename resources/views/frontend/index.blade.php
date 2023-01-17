@@ -243,15 +243,17 @@
                         <div class="col-sm-6 col-md-3 col-lg-3">
                             <div class="product-item">
                                 <div class="product__img">
-                                    <img src="{{asset('uploads/labtest/'.$labtest->thumbnail)}}" alt="Product" loading="lazy">
+                                    <a href="{{route('single.labtest',$labtest->id)}}">
+                                        <img src="{{asset('uploads/labtest/'.$labtest->thumbnail)}}" alt="Product" loading="lazy">
+                                    </a>
                                     <div class="product__action">
-                                        <a href="#" class="btn btn__primary btn__rounded">
-                                            <i class="icon-cart"></i> <span>Add To Cart</span>
+                                        <a href="{{route('single.labtest',$labtest->id)}}" class="btn btn__primary btn__rounded">
+                                            <i class="icon-cart"></i> <span>View Cart</span>
                                         </a>
                                     </div><!-- /.product-action -->
                                 </div><!-- /.product-img -->
                                 <div class="product__info">
-                                    <h4 class="product__title"><a href="#">{{$labtest->name}}</a></h4>
+                                    <h4 class="product__title"><a href="{{route('single.labtest',$labtest->id)}}">{{$labtest->name}}</a></h4>
                                     <span class="product__price">{{$labtest->price}} &#2547;</span>
                                 </div><!-- /.product-content -->
                             </div><!-- /.product-item -->
