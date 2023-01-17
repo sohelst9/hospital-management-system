@@ -23,11 +23,14 @@ Route::post('/admin/login/store', [AdminController::class, 'login_store'])->name
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     Route::get('/dashboard', [DashboardController::class, 'admin_dashboard'])->name('admin.dashboard');
-    //admin register
-    Route::get('/register', [AdminController::class, 'register'])->name('admin.register');
-    Route::post('/register/store', [AdminController::class, 'register_store'])->name('admin.register.store');
-    // hospital ----
-    Route::resource('hospital', HospitalController::class)->middleware('roles');
+    Route::middleware('roles')->group(function () {
+        //admin register
+        Route::get('/register', [AdminController::class, 'register'])->name('admin.register');
+        Route::post('/register/store', [AdminController::class, 'register_store'])->name('admin.register.store');
+        // hospital ----
+        Route::resource('hospital', HospitalController::class);
+    });
+
 
     //categpry--
     Route::resource('category', CategoryController::class);
