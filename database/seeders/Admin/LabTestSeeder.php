@@ -17,9 +17,11 @@ class LabTestSeeder extends Seeder
     public function run()
     {
         Labtest::create([
+            'hospial_id'=>1,
             'category_id'=>1,
             'name'=> 'TC DC Blood Test',
             'slug'=>Str::slug('Lab Aid Hospital', '-'),
+            'price'=>250,
             'description'=> 'The test measures Hb (Hemoglobin), TC (Total count), DC (Differential count), and ESR(Erythrocyte Sedimentation Rate).It gives information about the general',
             'thumbnail'=> 'tc-dc.jpeg',
             'admin_id'=> 1,

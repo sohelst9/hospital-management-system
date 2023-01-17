@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Category;
+use App\Models\Admin\Hospital;
 use App\Models\Admin\Labtest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,8 +25,8 @@ class LabTestController extends Controller
             $labtests = Labtest::paginate(10);
         }
         else{
-           $category_id = Category::where('admin_id', $admin_id)->first();
-            $labtests = Labtest::where('category_id', $category_id?->id)->paginate();
+            $hospital = Hospital::where('admin_id', Auth::guard('admin')->user()->id)->first();
+            $labtests = Labtest::where('hospital_id', $hospital->id)->paginate();
         }
 
         return view('admin.labtest.index', compact('labtests'));
@@ -38,8 +39,9 @@ class LabTestController extends Controller
      */
     public function create()
     {
-        $categories = Category::where('admin_id', Auth::guard('admin')->user()->id)->get();
-        return view('admin.labtest.create', compact('categories'));
+        $hospital = Hospital::where('admin_id', Auth::guard('admin')->user()->id)->first();
+        $categories = Category::where('hospital_id', $hospital->id)->get();
+        return view('admin.labtest.create', compact('categories', 'hospital'));
     }
 
     /**
@@ -53,7 +55,9 @@ class LabTestController extends Controller
         $admin_id = Auth::guard('admin')->user()->id;
         $request->validate([
             'name' => 'required',
+            'hospital' => 'required',
             'category' => 'required',
+            'price' => 'required',
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
         ]);
         if ($request->hasfile('thumbnail')) {
@@ -62,9 +66,11 @@ class LabTestController extends Controller
             $request->file('thumbnail')->move($filePath, $file);
         }
         Labtest::create([
+            'hospital_id' => $request->hospital,
             'category_id' => $request->category,
             'name' => $request->name,
             'slug' => Str::slug($request->name, '-'),
+            'price'=>$request->price,
             'description' => $request->description,
             'thumbnail' => $file,
             'admin_id'=>$admin_id
@@ -105,11 +111,12 @@ class LabTestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate(['name'=>'required', 'category'=>'required']);
+        $request->validate(['name'=>'required', 'category'=>'required', 'price'=>'required']);
         Labtest::find($id)->update([
             'category_id'=>$request->category,
             'name'=>$request->name,
             'slug'=>Str::slug($request->name, '-'),
+            'price'=>$request->price,
             'description'=>$request->description
         ]);
         if($request->hasfile('thumbnail')){

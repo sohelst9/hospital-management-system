@@ -15,5 +15,10 @@ class Category extends Model
         return $this->belongsTo(Hospital::class, 'hospital_id');
     }
 
-    
+    public function labtest()
+    {
+        return $this->hasMany(labtest::class, 'category_id');
+    }
+
+
 }

@@ -13,4 +13,9 @@ class Labtest extends Model
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
+
+    public function hospital()
+    {
+        return $this->belongsTo(Hospital::class, 'hospital_id');
+    }
 }

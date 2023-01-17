@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('labtests', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('hospital_id')->constrained()->onDelete('cascade');
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('slug')->nullable();
+            $table->string('price')->nullable();
             $table->text('description')->nullable();
             $table->text('thumbnail');
             $table->foreignId('admin_id')->constrained()->onDelete('cascade');

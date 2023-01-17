@@ -18,6 +18,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //frontend---
 Route::get('/', [FrontendController::class, 'index'])->name('index');
+Route::get('/hospital/{id}/category', [FrontendController::class, 'category'])->name('single.category');
+Route::get('/hospital/category/{id}/labtest', [FrontendController::class, 'labtest'])->name('labtest');
+Route::get('/hospital/category/labtest/single/{id}', [FrontendController::class, 'single_labtest'])->name('single.labtest');
 // admin route---
 Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
 Route::post('/admin/login/store', [AdminController::class, 'login_store'])->name('admin.login.store');

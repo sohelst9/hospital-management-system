@@ -6,5 +6,4 @@ function hospital(){
     $hospitals = Hospital::get();
     return $hospitals;
 }
-
 ?>

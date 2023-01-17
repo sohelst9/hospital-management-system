@@ -45,6 +45,16 @@
                             </div>
 
                             <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="price">Price <span class="text-danger">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="price" name="price" value="{{ $labtest->price }}" />
+                                    @error('price')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="subtitle">Description</label>
                                 <div class="col-sm-10">
                                     <textarea name="description" id="description" class="form-control">{{ $labtest->description }}</textarea>

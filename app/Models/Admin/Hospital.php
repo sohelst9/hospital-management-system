@@ -9,4 +9,9 @@ class Hospital extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function labtest()
+    {
+        return $this->hasMany(labtest::class, 'category_id');
+    }
 }

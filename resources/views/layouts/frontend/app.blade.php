@@ -64,10 +64,7 @@
                     <li><a href="#"><i class="fab fa-instagram"></i></a></li>
                     <li><a href="#"><i class="fab fa-twitter"></i></a></li>
                   </ul><!-- /.social-icons -->
-                  <form class="header-topbar__search">
-                    <input type="text" class="form-control" placeholder="Search...">
-                    <button class="header-topbar__search-btn"><i class="fa fa-search"></i></button>
-                  </form>
+
                 </div>
               </div>
             </div><!-- /.col-12 -->
@@ -76,7 +73,7 @@
       </div><!-- /.header-top -->
       <nav class="navbar navbar-expand-lg sticky-navbar">
         <div class="container-fluid">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="{{route('index')}}">
             <img src="{{ asset('assets/frontend/assets/images/logo/logo-light.png')}}" class="logo-light" alt="logo">
             <img src="{{ asset('assets/frontend/assets/images/logo/logo-dark.png')}}" class="logo-dark" alt="logo">
           </a>
@@ -86,7 +83,7 @@
           <div class="collapse navbar-collapse" id="mainNavigation">
             <ul class="navbar-nav ml-auto">
               <li class="nav__item has-dropdown">
-                <a href="index.html" data-toggle="dropdown" class=" nav__item-link active">Home</a>
+                <a href="{{route('index')}}" data-toggle="dropdown" class=" nav__item-link active">Home</a>
               </li><!-- /.nav-item -->
               <li class="nav__item has-dropdown">
                 <a href="about-us.html" data-toggle="dropdown" class=" nav__item-link">About Us</a>
@@ -110,7 +107,7 @@
                     @endphp
                     @foreach ($hospitals as $hospital)
                     <li class="nav__item">
-                        <a href="shop.html" class="nav__item-link">Dhaka Medical Hospital</a>
+                        <a href="{{ route('single.category',$hospital->id) }}" class="nav__item-link">{{$hospital->name}}</a>
                     </li><!-- /.nav-item -->
                     @endforeach
 

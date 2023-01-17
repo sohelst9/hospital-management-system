@@ -17,6 +17,7 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Category</th>
+                            <th>Price</th>
                             <th>Image</th>
                             <th>Actions</th>
                         </tr>
@@ -27,6 +28,7 @@
                                 <td>{{ ($labtests->currentpage() - 1) * $labtests->perpage() + $loop->index + 1 }}</td>
                                 <td>{{ $labtest->name }}</td>
                                 <td>{{ $labtest?->category->name }}</td>
+                                <td>{{ $labtest->price ?? '0' }}</td>
                                 <td><img src="{{ asset('uploads/labtest/' . $labtest->thumbnail) }}"
                                         width="100px" class="rounded-circle"></td>
                                 <td>
