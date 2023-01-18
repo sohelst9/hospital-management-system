@@ -20,6 +20,7 @@
                                 @csrf
                                 <input type="hidden" name="labtest_id" value="{{$labtest->id}}">
                                 <input type="hidden" name="quantity" value="1">
+                                <input type="hidden" name="hospital_id" value="{{ $hospital?->hospital->id }}">
                                 <h1 class="product__title">{{ $labtest->name }}</h1>
 
                                 <span class="product__price mb-20">{{ $labtest->price }} &#2547;</span>

@@ -25,6 +25,24 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <style>
+        .cart_btn
+        {
+            width: 3rem;
+            height: 3rem;
+            background: #21cdc0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+        .cart_btn:hover
+        {
+            background: #283b6a;
+            color: #fff;
+        }
+    </style>
 </head>
 
 <body>
@@ -148,6 +166,12 @@
                             </a>
                         </div>
                     @endauth
+
+                    <div class="d-none d-xl-flex align-items-center position-relative">
+                        <a href="{{route('cart.index')}}" class=" cart_btn  btn__rounded ml-30">
+                            <i class="icon-cart"></i>
+                        </a>
+                    </div>
 
                 </div><!-- /.container -->
             </nav><!-- /.navabr -->

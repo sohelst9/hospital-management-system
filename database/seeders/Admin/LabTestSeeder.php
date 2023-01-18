@@ -17,7 +17,7 @@ class LabTestSeeder extends Seeder
     public function run()
     {
         Labtest::create([
-            'hospial_id'=>1,
+            'hospital_id'=>1,
             'category_id'=>1,
             'name'=> 'TC DC Blood Test',
             'slug'=>Str::slug('Lab Aid Hospital', '-'),

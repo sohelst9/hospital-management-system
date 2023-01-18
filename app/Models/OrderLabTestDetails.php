@@ -8,5 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderLabTestDetails extends Model
 {
-    
+    protected $guarded = [];
+    public function labtest()
+    {
+        return $this->belongsTo(Labtest::class, 'labtest_id');
+    }
+
 }

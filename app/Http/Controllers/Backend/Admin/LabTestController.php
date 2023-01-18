@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Category;
 use App\Models\Admin\Hospital;
 use App\Models\Admin\Labtest;
+use App\Models\LabTestReport;
+use App\Models\Order;
+use App\Models\OrderLabTestDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -149,5 +152,45 @@ class LabTestController extends Controller
         File::delete(public_path($path));
         $labtest = Labtest::FindOrFail($id)->delete();
         return redirect()->route('labtest.index')->with('success', 'Labtest Deleted Success !');
+    }
+
+    //labtest_report
+    public function labtest_report()
+    {
+        $login_id = Auth::guard('admin')->user()->id;
+        $hospital = Hospital::where('admin_id', $login_id)->first();
+
+
+       $test_reports = OrderLabTestDetails::where('hospital_id', $hospital->id)->get();
+        return view('admin.labtestorder.index', compact('test_reports'));
+    }
+
+    public function test_status($id)
+    {
+        $test_report = OrderLabTestDetails::where('id', $id)->first();
+        if($test_report->status == 0){
+            OrderLabTestDetails::find($test_report->id)->update([
+                'status'=>1
+            ]);
+
+            return back()->with('success', 'Change Status');
+        }
+    }
+
+    public function testreport_store(Request $request)
+    {
+        //return $request->all();
+        if ($request->hasfile('report_file')) {
+            $file = $request->file('report_file')->getClientOriginalName();
+            $filePath = public_path('uploads/labtest_report');
+            $request->file('report_file')->move($filePath, $file);
+        }
+        LabTestReport::create([
+            'labtest_order_id' => $request->labtest_order_id,
+            'title' => $request->title,
+            'comment' => $request->comment,
+            'report_file' => $file,
+        ]);
+        return redirect()->route('admin.labtest.report')->with('success', 'Labtest Report Added  !');
     }
 }

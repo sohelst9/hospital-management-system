@@ -37,22 +37,7 @@ class DashboardController extends Controller
         }
     }
 
-    public function appointment_report_store(Request $request)
-    {
-        //return $request->all();
-        if ($request->hasfile('report_file')) {
-            $file = $request->file('report_file')->getClientOriginalName();
-            $filePath = public_path('uploads/appointment_report');
-            $request->file('report_file')->move($filePath, $file);
-        }
-        AppointmentReport::create([
-            'appointment_id' => $request->appointment_id,
-            'title' => $request->title,
-            'comment' => $request->comment,
-            'report_file' => $file,
-        ]);
-        return redirect()->route('admin.appointment')->with('success', 'Appointment Report Added  !');
-    }
+    
 
 
 }

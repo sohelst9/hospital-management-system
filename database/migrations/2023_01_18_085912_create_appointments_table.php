@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('date');
             $table->string('time_slot');
-            $table->tinyInteger('time_slot')->default(0);
+            $table->string('status')->default(0);
             $table->timestamps();
         });
     }

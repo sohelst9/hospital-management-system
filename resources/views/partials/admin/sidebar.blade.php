@@ -65,30 +65,32 @@
         </li>
 
         <!-- Hospital List -->
-        @if(Auth::guard('admin')->user()->Is_admin == 1)
-        <li class="menu-item {{ request()->routeIs('hospital.create') || request()->routeIs('hospital.index') || request()->routeIs('hospital.edit') ? 'active' : '' }} {{ request()->routeIs('hospital.create') || request()->routeIs('hospital.index') || request()->routeIs('hospital.edit') ? 'open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-layout"></i>
-                <div data-i18n="Layouts">Hospital List</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeIs('hospital.create') ? 'active' : '' }}">
-                    <a href="{{ route('hospital.create') }}" class="menu-link">
-                        <div data-i18n="Account">Add Hospital</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ request()->routeIs('hospital.index') ? 'active' : '' }}">
-                    <a href="{{ route('hospital.index') }}" class="menu-link">
-                        <div data-i18n="Notifications">All Hospital</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+        @if (Auth::guard('admin')->user()->Is_admin == 1)
+            <li
+                class="menu-item {{ request()->routeIs('hospital.create') || request()->routeIs('hospital.index') || request()->routeIs('hospital.edit') ? 'active' : '' }} {{ request()->routeIs('hospital.create') || request()->routeIs('hospital.index') || request()->routeIs('hospital.edit') ? 'open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-layout"></i>
+                    <div data-i18n="Layouts">Hospital List</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item {{ request()->routeIs('hospital.create') ? 'active' : '' }}">
+                        <a href="{{ route('hospital.create') }}" class="menu-link">
+                            <div data-i18n="Account">Add Hospital</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->routeIs('hospital.index') ? 'active' : '' }}">
+                        <a href="{{ route('hospital.index') }}" class="menu-link">
+                            <div data-i18n="Notifications">All Hospital</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         @endif
         <!----end hospital------->
 
         <!-- Category List -->
-        <li class="menu-item {{ request()->routeIs('category.create') || request()->routeIs('category.index') || request()->routeIs('category.edit') || request()->routeIs('labtest.index') || request()->routeIs('labtest.create') || request()->routeIs('labtest.edit') ? 'active' : '' }} {{ request()->routeIs('category.create') || request()->routeIs('category.index') || request()->routeIs('category.edit') || request()->routeIs('labtest.index') || request()->routeIs('labtest.create') || request()->routeIs('labtest.edit') ? 'open' : '' }}">
+        <li
+            class="menu-item {{ request()->routeIs('category.create') || request()->routeIs('category.index') || request()->routeIs('category.edit') || request()->routeIs('labtest.index') || request()->routeIs('labtest.create') || request()->routeIs('labtest.edit') ? 'active' : '' }} {{ request()->routeIs('category.create') || request()->routeIs('category.index') || request()->routeIs('category.edit') || request()->routeIs('labtest.index') || request()->routeIs('labtest.create') || request()->routeIs('labtest.edit') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
                 <div data-i18n="Layouts">Category List</div>
@@ -109,12 +111,21 @@
         </li>
         <!----end Category------->
 
-       <!-- Appointment -->
-       <li class="menu-item {{ request()->routeIs('admin.appointment') ? 'active' : '' }}">
-        <a href="{{ route('admin.appointment') }}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Appointment List</div>
-        </a>
-    </li>
+
+        <!-- labtestreport -->
+        <li class="menu-item {{ request()->routeIs('admin.labtest.report') ? 'active' : '' }}">
+            <a href="{{ route('admin.labtest.report') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">LabTest Report</div>
+            </a>
+        </li>
+
+        <!-- Appointment -->
+        <li class="menu-item {{ request()->routeIs('admin.appointment') ? 'active' : '' }}">
+            <a href="{{ route('admin.appointment') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Appointment List</div>
+            </a>
+        </li>
     </ul>
 </aside>

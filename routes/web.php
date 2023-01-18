@@ -31,7 +31,8 @@ Route::middleware('web')->group(function(){
     Route::get('/dashboard', [DashbaordController::class, 'dashbaord'])->name('frontend.dashboard');
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout');
-    Route::get('/order/list', [DashbaordController::class, 'order_list'])->name('order.list');
+    Route::get('/test/list', [DashbaordController::class, 'order_list'])->name('order.list');
+    Route::get('/test/report/view/{id}', [DashbaordController::class, 'test_report_view'])->name('test.report.view');
     Route::get('/user/appointment/report', [DashbaordController::class, 'user_appointment_report'])->name('user.appointment.report');
     Route::post('/appiontmant', [FrontendController::class, 'appiontmant'])->name('appiontmant');
 });
@@ -41,9 +42,14 @@ Route::post('/admin/login/store', [AdminController::class, 'login_store'])->name
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     Route::get('/dashboard', [DashboardController::class, 'admin_dashboard'])->name('admin.dashboard');
+    Route::get('/labtest/report', [LabTestController::class, 'labtest_report'])->name('admin.labtest.report');
+    Route::get('/testreport/status/{id}', [LabTestController::class, 'test_status'])->name('admin.testreport.status');
+    Route::post('/testreport/store', [LabTestController::class, 'testreport_store'])->name('admin.test.report.store');
+
+
     Route::get('/appointment/list', [DashboardController::class, 'appointment_list'])->name('admin.appointment');
     Route::get('/appointment/status/{id}', [DashboardController::class, 'appointment_status'])->name('admin.appointment.status');
-    Route::post('/appointment/report/store', [DashboardController::class, 'appointment_report_store'])->name('admin.appointment.report.store');
+
     Route::middleware('roles')->group(function () {
         //admin register
         Route::get('/register', [AdminController::class, 'register'])->name('admin.register');

@@ -222,7 +222,7 @@
     <!-- ========================
               Services Layout 1
           =========================== -->
-    <section class="services-layout1 services-carousel">
+    {{-- <section class="services-layout1 services-carousel">
         <div class="bg-img"><img src="{{ asset('assets/frontend/assets/images/backgrounds/2.jpg') }}" alt="background">
         </div>
         <div class="container">
@@ -263,7 +263,7 @@
                 </div><!-- /.col-12 -->
             </div><!-- /.row -->
         </div><!-- /.container -->
-    </section><!-- /.Services Layout 1 -->
+    </section><!-- /.Services Layout 1 --> --}}
 
 
 

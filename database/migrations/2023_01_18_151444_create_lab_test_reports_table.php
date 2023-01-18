@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('appointment_reports', function (Blueprint $table) {
+        Schema::create('lab_test_reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('appointment_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('labtest_order_id');
             $table->string('title');
             $table->text('comment');
             $table->text('report_file')->nullable();
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('appointment_reports');
+        Schema::dropIfExists('lab_test_reports');
     }
 };

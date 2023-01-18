@@ -37,24 +37,37 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>LabTest Name</th>
                                             <th>Date</th>
                                             <th>Total</th>
                                             <th>Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @forelse ($order_lists as $key=>$order)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
+                                                <td>{{ $order?->labtest->name }}</td>
                                                 <td>{{ $order->created_at }}</td>
-                                                <td>&#2547; {{ $order->total }} for <span>{{ $order->orderDetails->count() }}</span> item</td>
+                                                <td>&#2547; {{ $order->total }}
                                                 <td>
                                                     @if ($order->status == 0)
-                                                        <span class="btns">Pending</span>
+                                                        <span class="">Pending</span>
                                                     @elseIf($order->status == 1)
-                                                        <span class="btns">Confirmed</span>
+                                                        <span class="">Confirmed</span>
                                                     @else
-                                                        <span class="btns">Delevery</span>
+                                                        <span class="">Delevery</span>
+                                                    @endif
+                                                </td>
+
+                                                <td>
+                                                    @if ($order->status == 0)
+                                                        <button type="button" class="btns">
+                                                            Report
+                                                        </button>
+                                                    @else
+                                                        <a href="{{route('test.report.view', $order->id)}}" class="btns">View Report</a>
                                                     @endif
                                                 </td>
                                             </tr>
