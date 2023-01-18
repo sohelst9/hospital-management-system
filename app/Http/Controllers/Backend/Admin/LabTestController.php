@@ -165,6 +165,11 @@ class LabTestController extends Controller
         return view('admin.labtestorder.index', compact('test_reports'));
     }
 
+    public function report_create($id)
+    {
+        return view('admin.labtestorder.labtest_report_create',compact('id'));
+    }
+
     public function test_status($id)
     {
         $test_report = OrderLabTestDetails::where('id', $id)->first();

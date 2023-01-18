@@ -27,8 +27,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     <style>
-        .cart_btn
-        {
+        .cart_btn {
             width: 3rem;
             height: 3rem;
             background: #21cdc0;
@@ -37,8 +36,8 @@
             justify-content: center;
             color: #fff;
         }
-        .cart_btn:hover
-        {
+
+        .cart_btn:hover {
             background: #283b6a;
             color: #fff;
         }
@@ -120,11 +119,15 @@
                     <div class="collapse navbar-collapse" id="mainNavigation">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav__item has-dropdown">
-                                <a href="{{ route('index') }}"
-                                    class=" nav__item-link active">Home</a>
+                                <a href="{{ route('index') }}" class=" nav__item-link active">Home</a>
                             </li><!-- /.nav-item -->
                             <li class="nav__item has-dropdown">
-                                <a href="{{route('appointment_page')}}"  class=" nav__item-link">Appointment</a>
+                                <a href="{{ route('appointment_page') }}" class=" nav__item-link">Appointment</a>
+
+                            </li><!-- /.nav-item -->
+
+                            <li class="nav__item has-dropdown">
+                                <a href="{{ route('all_labs.test') }}" class=" nav__item-link">All Test</a>
 
                             </li><!-- /.nav-item -->
 
@@ -145,7 +148,7 @@
                                 </ul><!-- /.dropdown-menu -->
                             </li><!-- /.nav-item -->
                             <li class="nav__item">
-                                <a href="{{route('contact')}}" class="nav__item-link">Contacts</a>
+                                <a href="{{ route('contact') }}" class="nav__item-link">Contacts</a>
                             </li><!-- /.nav-item -->
                         </ul><!-- /.navbar-nav -->
                         <button class="close-mobile-menu d-block d-lg-none"><i class="fas fa-times"></i></button>
@@ -168,7 +171,7 @@
                     @endauth
 
                     <div class="d-none d-xl-flex align-items-center position-relative">
-                        <a href="{{route('cart.index')}}" class=" cart_btn  btn__rounded ml-30">
+                        <a href="{{ route('cart.index') }}" class=" cart_btn  btn__rounded ml-30">
                             <i class="icon-cart"></i>
                         </a>
                     </div>
@@ -196,7 +199,8 @@
                                     first and best
                                     choice for your family healthcare.
                                 </p>
-                                <a href="{{route('appointment_page')}}" class="btn btn__primary btn__primary-style2 btn__link">
+                                <a href="{{ route('appointment_page') }}"
+                                    class="btn btn__primary btn__primary-style2 btn__link">
                                     <span>Make Appointment</span> <i class="icon-arrow-right"></i>
                                 </a>
                             </div><!-- /.footer-widget__content -->
@@ -210,7 +214,7 @@
                                             $hospitals = hospital();
                                         @endphp
                                         @foreach ($hospitals as $hospital)
-                                            <li><a href="#">{{$hospital->name}}</a></li>
+                                            <li><a href="#">{{ $hospital->name }}</a></li>
                                         @endforeach
                                     </ul>
                                 </nav>
@@ -222,11 +226,11 @@
                                 <nav>
                                     <ul class="list-unstyled">
                                         @php
-                                        $hospitals = hospital();
-                                    @endphp
-                                    @foreach ($hospitals as $hospital)
-                                        <li><a href="#">{{$hospital->name}}</a></li>
-                                    @endforeach
+                                            $hospitals = hospital();
+                                        @endphp
+                                        @foreach ($hospitals as $hospital)
+                                            <li><a href="#">{{ $hospital->name }}</a></li>
+                                        @endforeach
                                     </ul>
                                 </nav>
                             </div><!-- /.footer-widget__content -->

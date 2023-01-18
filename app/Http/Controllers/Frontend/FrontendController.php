@@ -34,8 +34,9 @@ class FrontendController extends Controller
     public function labtest($id)
     {
         $category = Category::findOrFail($id);
+        $hospital = Category::with('hospital')->findOrFail($id);
         $labtests = Labtest::where('category_id', $id)->get();
-        return view('frontend.labtest', compact('category', 'labtests'));
+        return view('frontend.labtest', compact('category', 'labtests', 'hospital'));
     }
 
     public function single_labtest($id)
@@ -87,5 +88,13 @@ class FrontendController extends Controller
         $hospitals = Hospital::get();
         $categories = Category::get();
         return view('frontend.appointment_page', compact('hospitals', 'categories'));
+    }
+
+    public function all_labs_test()
+    {
+
+       // $hospital = Category::with('hospital')->findOrFail($id);
+        $labtests = Labtest::with('hospital')->get();
+        return view('frontend.all_labtest', compact('labtests'));
     }
 }

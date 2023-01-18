@@ -48,6 +48,7 @@
                                         <tbody>
                                             @php
                                                 $total = 0;
+                                                $grand_total =0;
                                             @endphp
                                             @forelse ($carts as $key=>$cart)
                                                 <tr>
@@ -64,6 +65,7 @@
                                                 </tr>
                                                 @php
                                                     $total = $subtotal;
+                                                    $grand_total = $grand_total + $subtotal;
                                                 @endphp
                                             @empty
                                             @endforelse
@@ -128,7 +130,7 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <input type="hidden" name="total" value="{{ $total }}">
-                                                            <h5>Total : <span>{{ $total }} </span>&#2547;</h5>
+                                                            <h5>Total : <span>{{ $grand_total }} </span>&#2547;</h5>
                                                         </div>
                                                     </div>
                                                 </div>

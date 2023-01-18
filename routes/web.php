@@ -25,6 +25,7 @@ Route::get('/hospital/{id}/category', [FrontendController::class, 'category'])->
 Route::get('/hospital/category/{id}/labtest', [FrontendController::class, 'labtest'])->name('labtest');
 Route::get('/hospital/category/labtest/single/{id}', [FrontendController::class, 'single_labtest'])->name('single.labtest');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
+Route::get('/all_labs/test', [FrontendController::class, 'all_labs_test'])->name('all_labs.test');
 Route::get('/appointment_page', [FrontendController::class, 'appointment_page'])->name('appointment_page');
 Route::middleware('web')->group(function(){
     Route::post('cart/store', [CartController::class, 'store'])->name('cart.store');
@@ -44,6 +45,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'admin_dashboard'])->name('admin.dashboard');
     Route::get('/labtest/report', [LabTestController::class, 'labtest_report'])->name('admin.labtest.report');
     Route::get('/testreport/status/{id}', [LabTestController::class, 'test_status'])->name('admin.testreport.status');
+    Route::get('/testreport/create/{id}', [LabTestController::class, 'report_create'])->name('labtest.report.create');
     Route::post('/testreport/store', [LabTestController::class, 'testreport_store'])->name('admin.test.report.store');
 
 

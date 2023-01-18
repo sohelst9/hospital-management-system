@@ -11,14 +11,14 @@
                     <div class="row product-item-single">
                         <div class="col-sm-6">
                             <div class="single_product product__img">
-                                <img src="{{ asset('uploads/labtest/' . $labtest->thumbnail) }}" class="zoomin" alt="product"
-                                    loading="lazy">
+                                <img src="{{ asset('uploads/labtest/' . $labtest->thumbnail) }}" class="zoomin"
+                                    alt="product" loading="lazy">
                             </div><!-- /.product-img -->
                         </div>
                         <div class="col-sm-6">
-                            <form action="{{route('cart.store')}}" method="POST">
+                            <form action="{{ route('cart.store') }}" method="POST">
                                 @csrf
-                                <input type="hidden" name="labtest_id" value="{{$labtest->id}}">
+                                <input type="hidden" name="labtest_id" value="{{ $labtest->id }}">
                                 <input type="hidden" name="quantity" value="1">
                                 <input type="hidden" name="hospital_id" value="{{ $hospital?->hospital->id }}">
                                 <h1 class="product__title">{{ $labtest->name }}</h1>
@@ -64,24 +64,35 @@
                     <div class="row">
                         @forelse ($related_tests as $related_test)
                             <div class="col-sm-6 col-md-6 col-lg-3">
-                                <div class="product-item">
-                                    <div class="product__img">
-                                        <a href="{{ route('single.labtest', $related_test->id) }}"><img
-                                                src="{{ asset('uploads/labtest/' . $related_test->thumbnail) }}"
-                                                alt="Product" loading="lazy"></a>
-                                        <div class="product__action">
-                                            <a href="#" class="btn btn__primary btn__rounded">
-                                                <i class="icon-cart"></i> <span>Add To Cart</span>
-                                            </a>
-                                        </div><!-- /.product-action -->
-                                    </div><!-- /.product-img -->
-                                    <div class="product__info">
-                                        <h4 class="product__title"><a
-                                                href="{{ route('single.labtest', $related_test->id) }}">{{ $related_test->name }}</a>
-                                        </h4>
-                                        <span class="product__price">{{ $related_test->price }} &#2547;</span>
-                                    </div><!-- /.product-content -->
-                                </div><!-- /.product-item -->
+                                <form action="{{ route('cart.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="labtest_id" value="{{ $labtest->id }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input type="hidden" name="hospital_id" value="{{ $hospital?->hospital->id }}">
+                                    <div class="product-item">
+                                        <div class="product__img">
+                                            <a href="{{ route('single.labtest', $related_test->id) }}"><img
+                                                    src="{{ asset('uploads/labtest/' . $related_test->thumbnail) }}"
+                                                    alt="Product" loading="lazy"></a>
+                                            <div class="product__action">
+                                                @auth
+                                                    <button type="submit" class="btn btn__primary btn__rounded">
+                                                        <i class="icon-cart"></i> <span>Add To Cart</span>
+                                                    </button>
+                                                @else
+                                                    <a href="{{ route('login') }}" class="btn btn__secondary btn__rounded">add
+                                                        to cart</a>
+                                                @endauth
+                                            </div><!-- /.product-action -->
+                                        </div><!-- /.product-img -->
+                                        <div class="product__info">
+                                            <h4 class="product__title"><a
+                                                    href="{{ route('single.labtest', $related_test->id) }}">{{ $related_test->name }}</a>
+                                            </h4>
+                                            <span class="product__price">{{ $related_test->price }} &#2547;</span>
+                                        </div><!-- /.product-content -->
+                                    </div><!-- /.product-item -->
+                                </form>
                             </div><!-- /.col-lg-3 -->
                         @empty
                             <div class="not_avilable">

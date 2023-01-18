@@ -18,7 +18,6 @@
                             <th>Date</th>
                             <th>Time</th>
                             <th>Status</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -37,13 +36,7 @@
                                         <span class="btn btn-sm btn-success">Success</span>
                                     @endif
                                 </td>
-                                <td>
-                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#modalCenter">
-                                        Report
-                                    </button>
 
-                                </td>
                             </tr>
                         @endforeach
 

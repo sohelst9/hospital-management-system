@@ -73,7 +73,7 @@
                                 {{ strip_tags(Str::limit($category->description, 120)) }}
                             </p>
                             <a href="{{route('labtest',$category->id)}}" class="btn btn__secondary btn__outlined btn__rounded">
-                                <span>Read More</span>
+                                <span>View Lab Tests</span>
                                 <i class="icon-arrow-right"></i>
                             </a>
                         </div><!-- /.service__content -->
