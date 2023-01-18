@@ -18,10 +18,15 @@ class DashboardController extends Controller
 
     public function appointment_list()
     {
-        $login_id = Auth::guard('admin')->user()->id;
+        if (Auth::guard('admin')->user()->Is_admin == 1) {
+            $appointments = Appointment::get();
+        }
+        else {
+            $login_id = Auth::guard('admin')->user()->id;
         $hospital = Hospital::where('admin_id', $login_id)->first();
-
          $appointments = Appointment::where('hospital_id', $hospital->id)->with('user')->get();
+        }
+
          return view('admin.appointment.index', compact('appointments'));
     }
 
@@ -37,7 +42,7 @@ class DashboardController extends Controller
         }
     }
 
-    
+
 
 
 }

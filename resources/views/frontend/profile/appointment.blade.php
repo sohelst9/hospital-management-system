@@ -38,6 +38,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>User Name</th>
+                                            <th>Hospital Name</th>
                                             <th>Category Name</th>
                                             <th>phone</th>
                                             <th>Date</th>
@@ -50,6 +51,7 @@
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $appointment->name }}</td>
+                                                <td>{{ $appointment?->hospital->name }}</td>
                                                 <td>{{ $appointment?->category->name }}</td>
                                                 <td>{{ $appointment->phone }}</td>
                                                 <td>{{ $appointment->date }}</td>

@@ -63,5 +63,6 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
     //categpry--
     Route::resource('category', CategoryController::class);
+    Route::post('/getcategory', [CategoryController::class, 'getcategory'])->name('hospital.based.category');
     Route::resource('labtest', LabTestController::class);
 });

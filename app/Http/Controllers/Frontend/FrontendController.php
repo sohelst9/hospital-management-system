@@ -93,7 +93,6 @@ class FrontendController extends Controller
     public function all_labs_test()
     {
 
-       // $hospital = Category::with('hospital')->findOrFail($id);
         $labtests = Labtest::with('hospital')->get();
         return view('frontend.all_labtest', compact('labtests'));
     }

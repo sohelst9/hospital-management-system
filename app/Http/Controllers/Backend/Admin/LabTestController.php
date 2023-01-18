@@ -24,10 +24,9 @@ class LabTestController extends Controller
     public function index()
     {
         $admin_id = Auth::guard('admin')->user()->id;
-        if(Auth::guard('admin')->user()->Is_admin == 1){
+        if (Auth::guard('admin')->user()->Is_admin == 1) {
             $labtests = Labtest::paginate(10);
-        }
-        else{
+        } else {
             $hospital = Hospital::where('admin_id', Auth::guard('admin')->user()->id)->first();
             $labtests = Labtest::where('hospital_id', $hospital->id)->paginate();
         }
@@ -35,24 +34,20 @@ class LabTestController extends Controller
         return view('admin.labtest.index', compact('labtests'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        $hospital = Hospital::where('admin_id', Auth::guard('admin')->user()->id)->first();
-        $categories = Category::where('hospital_id', $hospital->id)->get();
-        return view('admin.labtest.create', compact('categories', 'hospital'));
+        if (Auth::guard('admin')->user()->Is_admin == 1) {
+            $hospitals = Hospital::get();
+            $categories = Category::get();
+        } else {
+            $hospitals = Hospital::where('admin_id', Auth::guard('admin')->user()->id)->first();
+            $categories = Category::where('hospital_id', $hospitals->id)->get();
+        }
+
+        return view('admin.labtest.create', compact('categories', 'hospitals'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $admin_id = Auth::guard('admin')->user()->id;
@@ -73,67 +68,53 @@ class LabTestController extends Controller
             'category_id' => $request->category,
             'name' => $request->name,
             'slug' => Str::slug($request->name, '-'),
-            'price'=>$request->price,
+            'price' => $request->price,
             'description' => $request->description,
             'thumbnail' => $file,
-            'admin_id'=>$admin_id
+            'admin_id' => $admin_id
         ]);
         return redirect()->route('labtest.index')->with('success', 'New Lab Test Added !');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $labtest = Labtest::findOrFail($id);
-        $categories = Category::where('admin_id', Auth::guard('admin')->user()->id)->get();
-        return view('admin.labtest.edit', compact('labtest', 'categories'));
+        if (Auth::guard('admin')->user()->Is_admin == 1) {
+            $labtest = Labtest::findOrFail($id);
+            $categories = Category::get();
+            $hospitals = Hospital::get();
+            return view('admin.labtest.edit', compact('labtest', 'categories', 'hospitals'));
+        } else {
+            $labtest = Labtest::findOrFail($id);
+            $categories = Category::where('admin_id', Auth::guard('admin')->user()->id)->get();
+            return view('admin.labtest.edit', compact('labtest', 'categories'));
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
-        $request->validate(['name'=>'required', 'category'=>'required', 'price'=>'required']);
+        $request->validate(['name' => 'required', 'category' => 'required', 'price' => 'required']);
         Labtest::find($id)->update([
-            'category_id'=>$request->category,
-            'name'=>$request->name,
-            'slug'=>Str::slug($request->name, '-'),
-            'price'=>$request->price,
-            'description'=>$request->description
+            'hospital_id' => $request->hospital,
+            'category_id' => $request->category,
+            'name' => $request->name,
+            'slug' => Str::slug($request->name, '-'),
+            'price' => $request->price,
+            'description' => $request->description
         ]);
-        if($request->hasfile('thumbnail')){
+        if ($request->hasfile('thumbnail')) {
             //delete old image
             $oldFile = Labtest::find($id)->thumbnail;
-            $oldPath ='uploads/labtest/'.$oldFile;
+            $oldPath = 'uploads/labtest/' . $oldFile;
             File::delete(public_path($oldPath));
             // upload new image
             $file = $request->file('thumbnail');
-            $ThumbnailImageName =$file->getClientOriginalName();
-            $filePath =public_path('uploads/labtest');
-            $request->file('thumbnail')->move($filePath,$ThumbnailImageName);
+            $ThumbnailImageName = $file->getClientOriginalName();
+            $filePath = public_path('uploads/labtest');
+            $request->file('thumbnail')->move($filePath, $ThumbnailImageName);
             Labtest::find($id)->update([
-                'thumbnail'=>$ThumbnailImageName
+                'thumbnail' => $ThumbnailImageName
             ]);
         }
         return redirect()->route('labtest.index')->with('success', 'Labtest Updated !');
@@ -148,7 +129,7 @@ class LabTestController extends Controller
     public function destroy($id)
     {
         $thumbnail_image = Labtest::find($id)->thumbnail;
-        $path = 'uploads/labtest/'.$thumbnail_image;
+        $path = 'uploads/labtest/' . $thumbnail_image;
         File::delete(public_path($path));
         $labtest = Labtest::FindOrFail($id)->delete();
         return redirect()->route('labtest.index')->with('success', 'Labtest Deleted Success !');
@@ -157,25 +138,29 @@ class LabTestController extends Controller
     //labtest_report
     public function labtest_report()
     {
-        $login_id = Auth::guard('admin')->user()->id;
-        $hospital = Hospital::where('admin_id', $login_id)->first();
+        if (Auth::guard('admin')->user()->Is_admin == 1) {
+            $test_reports = OrderLabTestDetails::get();
+        }
+        else {
+            $login_id = Auth::guard('admin')->user()->id;
+            $hospital = Hospital::where('admin_id', $login_id)->first();
+            $test_reports = OrderLabTestDetails::where('hospital_id', $hospital->id)->get();
+        }
 
-
-       $test_reports = OrderLabTestDetails::where('hospital_id', $hospital->id)->get();
         return view('admin.labtestorder.index', compact('test_reports'));
     }
 
     public function report_create($id)
     {
-        return view('admin.labtestorder.labtest_report_create',compact('id'));
+        return view('admin.labtestorder.labtest_report_create', compact('id'));
     }
 
     public function test_status($id)
     {
         $test_report = OrderLabTestDetails::where('id', $id)->first();
-        if($test_report->status == 0){
+        if ($test_report->status == 0) {
             OrderLabTestDetails::find($test_report->id)->update([
-                'status'=>1
+                'status' => 1
             ]);
 
             return back()->with('success', 'Change Status');

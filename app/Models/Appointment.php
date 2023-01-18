@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Admin\Category;
+use App\Models\Admin\Hospital;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,8 +21,8 @@ class Appointment extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public function appointmentReport()
+    public function hospital()
     {
-        return $this->belongsTo(AppointmentReport::class, 'id', 'appointment_id');
+        return $this->belongsTo(Hospital::class, 'hospital_id');
     }
 }

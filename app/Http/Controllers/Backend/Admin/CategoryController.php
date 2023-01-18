@@ -19,11 +19,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        if(Auth::guard('admin')->user()->Is_admin == 1){
+        if (Auth::guard('admin')->user()->Is_admin == 1) {
             $categories = Category::paginate(10);
-        }
-        else{
-           $hospital_id = Hospital::where('admin_id', Auth::guard('admin')->user()->id)->first();
+        } else {
+            $hospital_id = Hospital::where('admin_id', Auth::guard('admin')->user()->id)->first();
             $categories = Category::where('hospital_id', $hospital_id?->id)->paginate();
         }
 
@@ -37,8 +36,13 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $hospital = Hospital::where('admin_id', Auth::guard('admin')->user()->id)->first();
-        return view('admin.category.create', compact('hospital'));
+        if (Auth::guard('admin')->user()->Is_admin == 1) {
+            $hospitals = Hospital::get();
+        } else {
+            $hospitals = Hospital::where('admin_id', Auth::guard('admin')->user()->id)->first();
+        }
+
+        return view('admin.category.create', compact('hospitals'));
     }
 
     /**
@@ -50,22 +54,22 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required',
-            'hospital'=>'required',
-            'thumbnail'=>'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'name' => 'required',
+            'hospital' => 'required',
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
         ]);
-        if($request->hasfile('thumbnail')){
+        if ($request->hasfile('thumbnail')) {
             $file = $request->file('thumbnail')->getClientOriginalName();
-            $filePath =public_path('uploads/category');
-            $request->file('thumbnail')->move($filePath,$file);
+            $filePath = public_path('uploads/category');
+            $request->file('thumbnail')->move($filePath, $file);
         }
         Category::create([
-            'hospital_id'=>$request->hospital,
-            'name'=>$request->name,
-            'slug'=>Str::slug($request->name, '-'),
-            'description'=>$request->description,
-            'thumbnail'=>$file,
-            'admin_id'=>Auth::guard('admin')->user()->id,
+            'hospital_id' => $request->hospital,
+            'name' => $request->name,
+            'slug' => Str::slug($request->name, '-'),
+            'description' => $request->description,
+            'thumbnail' => $file,
+            'admin_id' => Auth::guard('admin')->user()->id,
         ]);
         return redirect()->route('category.index')->with('success', 'New Category Added !');
     }
@@ -89,9 +93,15 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $hospital = Hospital::where('admin_id', Auth::guard('admin')->user()->id)->first();
-        $category = Category::findOrFail($id);
-        return view('admin.category.edit',compact('category', 'hospital'));
+        if (Auth::guard('admin')->user()->Is_admin == 1) {
+            $category = Category::findOrFail($id);
+            $hospitals = Hospital::get();
+        } else {
+            $hospitals = Hospital::where('admin_id', Auth::guard('admin')->user()->id)->first();
+            $category = Category::findOrFail($id);
+
+        }
+        return view('admin.category.edit', compact('category', 'hospitals'));
     }
 
     /**
@@ -103,25 +113,25 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate(['name'=>'required', 'hospital'=>'required',]);
+        $request->validate(['name' => 'required', 'hospital' => 'required',]);
         Category::find($id)->update([
-            'hospital_id'=>$request->hospital,
-            'name'=>$request->name,
-            'slug'=>Str::slug($request->name, '-'),
-            'description'=>$request->description
+            'hospital_id' => $request->hospital,
+            'name' => $request->name,
+            'slug' => Str::slug($request->name, '-'),
+            'description' => $request->description
         ]);
-        if($request->hasfile('thumbnail')){
+        if ($request->hasfile('thumbnail')) {
             //delete old image
             $oldFile = Category::find($id)->thumbnail;
-            $oldPath ='uploads/category/'.$oldFile;
+            $oldPath = 'uploads/category/' . $oldFile;
             File::delete(public_path($oldPath));
             // upload new image
             $file = $request->file('thumbnail');
-            $ThumbnailImageName =$file->getClientOriginalName();
-            $filePath =public_path('uploads/category');
-            $request->file('thumbnail')->move($filePath,$ThumbnailImageName);
+            $ThumbnailImageName = $file->getClientOriginalName();
+            $filePath = public_path('uploads/category');
+            $request->file('thumbnail')->move($filePath, $ThumbnailImageName);
             Category::find($id)->update([
-                'thumbnail'=>$ThumbnailImageName
+                'thumbnail' => $ThumbnailImageName
             ]);
         }
         return redirect()->route('category.index')->with('success', 'Category Updated !');
@@ -136,9 +146,18 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $thumbnail_image = Category::find($id)->thumbnail;
-        $path = 'uploads/category/'.$thumbnail_image;
+        $path = 'uploads/category/' . $thumbnail_image;
         File::delete(public_path($path));
         $category = Category::FindOrFail($id)->delete();
         return redirect()->route('category.index')->with('success', 'Category Deleted Success !');
+    }
+
+    public function getcategory(Request $request){
+        $categories =  Category::where('hospital_id',$request->hospital)->get();
+       $store =' <option value="">--select--</option>';
+       foreach($categories as $category){
+            $store .= '<option value="'.$category->id.'">'.$category->name.'</option>';
+       }
+       echo $store;
     }
 }

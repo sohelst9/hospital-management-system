@@ -31,7 +31,14 @@
                                 <label class="col-sm-2 col-form-label" for="name">Hospital <span class="text-danger">*</span></label>
                                 <div class="col-sm-10">
                                     <select name="hospital" id="hospital" class="form-control">
-                                            <option value="{{ $hospital?->id }}">{{ $hospital?->name }}</option>
+                                        @if (Auth::guard('admin')->user()->Is_admin == 1)
+                                            <option value="">-Select-</option>
+                                            @foreach ($hospitals as $hospital)
+                                                <option value="{{$hospital->id}}">{{$hospital->name}}</option>
+                                            @endforeach
+                                        @else
+                                            <option value="{{ $hospitals->id }}">{{ $hospitals->name }}</option>
+                                        @endif
                                     </select>
                                     @error('name')
                                         <p class="text-danger">{{ $message }}</p>

@@ -9,7 +9,7 @@
                 <div class="card mb-4">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <h5 class="mb-0">Add Lab Test</h5>
-                        <a href="{{route('labtest.index')}}" class="btn btn-sm btn-primary">
+                        <a href="{{ route('labtest.index') }}" class="btn btn-sm btn-primary">
                             <box-icon name='left-arrow-alt'></box-icon>Back
                         </a>
                     </div>
@@ -17,7 +17,8 @@
                         <form action="{{ route('labtest.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="name">Name <span class="text-danger">*</span></label>
+                                <label class="col-sm-2 col-form-label" for="name">Name <span
+                                        class="text-danger">*</span></label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="name" name="name"
                                         placeholder="Enter Hospital Name" />
@@ -28,10 +29,18 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="name">Hospital <span class="text-danger">*</span></label>
+                                <label class="col-sm-2 col-form-label" for="name">Hospital <span
+                                        class="text-danger">*</span></label>
                                 <div class="col-sm-10">
                                     <select name="hospital" id="hospital" class="form-control">
-                                            <option value="{{ $hospital->id }}">{{ $hospital->name }}</option>
+                                        @if (Auth::guard('admin')->user()->Is_admin == 1)
+                                            <option value="">-select-</option>
+                                            @foreach ($hospitals as $hospital)
+                                                <option value="{{ $hospital->id }}">{{ $hospital->name }}</option>
+                                            @endforeach
+                                        @else
+                                            <option value="{{ $hospitals->id }}">{{ $hospitals->name }}</option>
+                                        @endif
                                     </select>
                                     @error('name')
                                         <p class="text-danger">{{ $message }}</p>
@@ -40,14 +49,23 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="name">category <span class="text-danger">*</span></label>
+                                <label class="col-sm-2 col-form-label" for="name">category <span
+                                        class="text-danger">*</span></label>
                                 <div class="col-sm-10">
-                                    <select name="category" id="category" class="form-control">
-                                        <option value="">--select--</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                        @endforeach
-                                    </select>
+                                    @if (Auth::guard('admin')->user()->Is_admin == 1)
+                                        <select name="category" id="category" class="form-control">
+                                            <option value="">--select--</option>
+
+                                        </select>
+                                    @else
+                                        <select name="category" id="category" class="form-control">
+                                            <option value="">--select--</option>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    @endif
+
                                     @error('name')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -55,7 +73,8 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="price">Price <span class="text-danger">*</span></label>
+                                <label class="col-sm-2 col-form-label" for="price">Price <span
+                                        class="text-danger">*</span></label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="price" name="price" />
                                     @error('price')
@@ -72,7 +91,8 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="thumbnail">Thumbnail <span class="text-danger">*</span></label>
+                                <label class="col-sm-2 col-form-label" for="thumbnail">Thumbnail <span
+                                        class="text-danger">*</span></label>
                                 <div class="col-sm-10">
                                     <input type="file" class="form-control" id="thumbnail" name="thumbnail" />
                                     @error('thumbnail')
@@ -102,5 +122,22 @@
             .catch(error => {
                 console.error(error);
             });
+
+        //hospital based category
+        $('#hospital').change(function() {
+            var hospital = $('#hospital').val();
+            var url = "{{ route('hospital.based.category') }}";
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {
+                    'hospital': hospital
+                },
+                success: function(data) {
+                    $('#category').html(data);
+
+                }
+            });
+        });
     </script>
 @endsection

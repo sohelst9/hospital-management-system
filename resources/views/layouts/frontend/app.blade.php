@@ -170,11 +170,20 @@
                         </div>
                     @endauth
 
+                    @auth('web')
                     <div class="d-none d-xl-flex align-items-center position-relative">
                         <a href="{{ route('cart.index') }}" class=" cart_btn  btn__rounded ml-30">
                             <i class="icon-cart"></i>
                         </a>
                     </div>
+                    @else
+                    <div class="d-none d-xl-flex align-items-center position-relative">
+                        <a href="{{ route('login') }}" class=" cart_btn  btn__rounded ml-30">
+                            <i class="icon-cart"></i>
+                        </a>
+                    </div>
+                    @endauth
+
 
                 </div><!-- /.container -->
             </nav><!-- /.navabr -->
@@ -214,7 +223,9 @@
                                             $hospitals = hospital();
                                         @endphp
                                         @foreach ($hospitals as $hospital)
-                                            <li><a href="#">{{ $hospital->name }}</a></li>
+                                            <li><a
+                                                    href="{{ route('single.category', $hospital->id) }}">{{ $hospital->name }}</a>
+                                            </li>
                                         @endforeach
                                     </ul>
                                 </nav>
@@ -229,7 +240,9 @@
                                             $hospitals = hospital();
                                         @endphp
                                         @foreach ($hospitals as $hospital)
-                                            <li><a href="#">{{ $hospital->name }}</a></li>
+                                            <li><a
+                                                    href="{{ route('single.category', $hospital->id) }}">{{ $hospital->name }}</a>
+                                            </li>
                                         @endforeach
                                     </ul>
                                 </nav>

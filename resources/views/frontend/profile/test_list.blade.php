@@ -38,6 +38,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>LabTest Name</th>
+                                            <th>Hospital Name</th>
                                             <th>Date</th>
                                             <th>Total</th>
                                             <th>Status</th>
@@ -49,6 +50,7 @@
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $order?->labtest->name }}</td>
+                                                <td>{{ $order?->hospital->name }}</td>
                                                 <td>{{ $order->created_at }}</td>
                                                 <td>&#2547; {{ $order->total }}
                                                 <td>
