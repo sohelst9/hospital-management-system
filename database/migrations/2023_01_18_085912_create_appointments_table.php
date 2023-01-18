@@ -13,16 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('total')->nullable();
-            $table->tinyInteger('payment_method')->nullable();
-            $table->string('fname')->nullable();
-            $table->string('lname')->nullable();
-            $table->string('email')->nullable();
-            $table->string('address')->nullable();
-            $table->tinyInteger('status')->default(0);
+            $table->foreignId('hospital_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->string('name');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('date');
+            $table->string('time_slot');
+            $table->tinyInteger('time_slot')->default(0);
             $table->timestamps();
         });
     }
@@ -34,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('appointments');
     }
 };

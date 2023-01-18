@@ -466,8 +466,9 @@
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-7">
                     <div class="contact-panel mb-50">
-                        <form class="contact-panel__form" method="post" action="assets/php/contact.php"
-                            id="contactForm">
+                        <form class="" method="post" action="{{route('appiontmant')}}"
+                            id="">
+                            @csrf
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h4 class="contact-panel__title">Book An Appointment</h4>
@@ -480,64 +481,69 @@
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <i class="icon-widget form-group-icon"></i>
-                                        <select class="form-control">
-                                            <option value="0">Choose Clinic</option>
-                                            <option value="1">Pathology Clinic</option>
-                                            <option value="2">Pathology Clinic</option>
+                                        <select class="form-control" name="hospital" id="hospital" required>
+                                            <option value="">Choose Hospital</option>
+                                            @foreach ($hospitals as $hospital)
+                                                <option value="{{$hospital->id}}">{{$hospital->name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div><!-- /.col-lg-6 -->
                                 <div class="col-sm-6 col-md-6 col-lg-6">
-                                    <div class="form-group">
-                                        <i class="icon-user form-group-icon"></i>
-                                        <select class="form-control">
-                                            <option value="0">Choose Doctor</option>
-                                            <option value="1">Ahmed Abdallah</option>
-                                            <option value="2">Mahmoud Begha</option>
-                                        </select>
-                                    </div>
+                                    <select name="category" id="categories" class="form-control" required>
+                                        <option value="">Choose Category</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div><!-- /.col-lg-6 -->
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <i class="icon-news form-group-icon"></i>
                                         <input type="text" class="form-control" placeholder="Name" id="contact-name"
-                                            name="contact-name" required>
+                                            name="name" required>
                                     </div>
                                 </div><!-- /.col-lg-6 -->
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <i class="icon-email form-group-icon"></i>
                                         <input type="email" class="form-control" placeholder="Email"
-                                            id="contact-email" name="contact-email" required>
+                                            id="contact-email" name="email" required>
                                     </div>
                                 </div><!-- /.col-lg-6 -->
                                 <div class="col-sm-4 col-md-4 col-lg-4">
                                     <div class="form-group">
                                         <i class="icon-phone form-group-icon"></i>
                                         <input type="text" class="form-control" placeholder="Phone"
-                                            id="contact-Phone" name="contact-phone" required>
+                                            id="contact-Phone" name="phone" required>
                                     </div>
                                 </div><!-- /.col-lg-4 -->
                                 <div class="col-sm-4 col-md-4 col-lg-4">
                                     <div class="form-group form-group-date">
                                         <i class="icon-calendar form-group-icon"></i>
-                                        <input type="date" class="form-control" id="contact-date" name="contact-date"
+                                        <input type="date" class="form-control" id="contact-date" name="date"
                                             required>
                                     </div>
                                 </div><!-- /.col-lg-4 -->
                                 <div class="col-sm-4 col-md-4 col-lg-4">
                                     <div class="form-group form-group-date">
                                         <i class="icon-clock form-group-icon"></i>
-                                        <input type="time" class="form-control" id="contact-time" name="contact-time"
+                                        <input type="time" class="form-control" id="contact-time" name="time"
                                             required>
                                     </div>
                                 </div><!-- /.col-lg-4 -->
                                 <div class="col-12">
+                                    @auth
                                     <button type="submit"
                                         class="btn btn__secondary btn__rounded btn__block btn__xhight mt-10">
                                         <span>Book Appointment</span> <i class="icon-arrow-right"></i>
                                     </button>
-                                    <div class="contact-result"></div>
+                                    @else
+                                    <a href="{{route('login')}}"
+                                        class="btn btn__secondary btn__rounded btn__block btn__xhight mt-10">
+                                        <span>Book Appointment</span> <i class="icon-arrow-right"></i>
+                                </a>
+                                    @endauth
                                 </div><!-- /.col-lg-12 -->
                             </div><!-- /.row -->
                         </form>
@@ -595,4 +601,28 @@
             </div><!-- /.row -->
         </div><!-- /.container -->
     </section><!-- /.contact layout 3 -->
+@endsection
+@section('footer_script')
+    {{-- <script>
+        $('#hospital').change(function(){
+            var hospital_id = $('#hospital').val();
+            var url = "{{ route('get.category') }}";
+
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+            $.ajax({
+                type: "post",
+                url: url,
+                data: {'hospital_id':hospital_id},
+                success: function (data) {
+                    $('#categories').html(data);
+                }
+            });
+        })
+    </script> --}}
 @endsection

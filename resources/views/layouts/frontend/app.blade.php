@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="Medcity - Medical Healthcare HTML5 Template">
     <link href="{{ asset('assets/frontend/assets/images/favicon/favicon.png') }}" rel="icon">
     <title>Medcity - Medical Healthcare</title>
@@ -267,6 +268,7 @@
     <script src="{{ asset('assets/frontend/assets/js/jquery-3.5.1.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/assets/js/plugins.js') }}"></script>
     <script src="{{ asset('assets/frontend/assets/js/main.js') }}"></script>
+    @yield('footer_script')
     <script>
         @if(Session::has('message'))
         toastr.options =

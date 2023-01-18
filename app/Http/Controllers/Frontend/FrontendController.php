@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Category;
 use App\Models\Admin\Hospital;
 use App\Models\Admin\Labtest;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
@@ -14,9 +16,11 @@ class FrontendController extends Controller
     {
         $hospitals = Hospital::get();
         $labtests = Labtest::get();
+        $categories = Category::get();
         return view('frontend.index', [
             'hospitals'=>$hospitals,
             'labtests'=>$labtests,
+            'categories'=>$categories,
         ]);
     }
 
@@ -44,5 +48,32 @@ class FrontendController extends Controller
         ->where('id', '!=', $id)
         ->take(10)->get();;
         return view('frontend.single_labetest', compact('labtest', 'category', 'hospital', 'related_tests'));
+    }
+
+    // public function get_category(Request $request)
+    // {
+    //     $categories =  Category::where('hospital_id',$request->hospital_id)->get();
+    //    $store =' <option value="">--Categories--</option>';
+    //    foreach($categories as $category){
+    //         $store .= '<option value="'.$category->id.'">'.$category->name.'</option>';
+    //    }
+    //    echo $store;
+    // }
+
+    public function appiontmant(Request $request)
+    {
+        
+        Appointment::create([
+            'user_id'=>Auth::user()->id,
+            'hospital_id'=>$request->hospital,
+            'category_id'=>$request->category,
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+            'date'=>$request->date,
+            'time_slot'=>$request->time,
+        ]);
+
+        return back()->with('message', 'Appointmennt Booked Successfully !');
     }
 }

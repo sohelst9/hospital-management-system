@@ -124,7 +124,7 @@
                                                 <br>
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <button type="submit" class="checkout">CheckOut</button>
+                                                        <button type="submit" class="checkout">Order</button>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <input type="hidden" name="total" value="{{ $total }}">

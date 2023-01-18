@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Backend\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Hospital;
+use App\Models\Appointment;
+use App\Models\AppointmentReport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -12,5 +16,43 @@ class DashboardController extends Controller
         return view('admin.dashboard');
     }
 
-   
+    public function appointment_list()
+    {
+        $login_id = Auth::guard('admin')->user()->id;
+        $hospital = Hospital::where('admin_id', $login_id)->first();
+
+         $appointments = Appointment::where('hospital_id', $hospital->id)->with('user')->get();
+         return view('admin.appointment.index', compact('appointments'));
+    }
+
+    public function appointment_status($id)
+    {
+        $appointment = Appointment::where('id', $id)->first();
+        if($appointment->status == 0){
+            Appointment::find($appointment->id)->update([
+                'status'=>1
+            ]);
+
+            return back()->with('success', 'Change Status');
+        }
+    }
+
+    public function appointment_report_store(Request $request)
+    {
+        //return $request->all();
+        if ($request->hasfile('report_file')) {
+            $file = $request->file('report_file')->getClientOriginalName();
+            $filePath = public_path('uploads/appointment_report');
+            $request->file('report_file')->move($filePath, $file);
+        }
+        AppointmentReport::create([
+            'appointment_id' => $request->appointment_id,
+            'title' => $request->title,
+            'comment' => $request->comment,
+            'report_file' => $file,
+        ]);
+        return redirect()->route('admin.appointment')->with('success', 'Appointment Report Added  !');
+    }
+
+
 }
