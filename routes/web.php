@@ -27,7 +27,7 @@ Route::get('/hospital/category/labtest/single/{id}', [FrontendController::class,
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
 Route::get('/all_labs/test', [FrontendController::class, 'all_labs_test'])->name('all_labs.test');
 Route::get('/appointment_page', [FrontendController::class, 'appointment_page'])->name('appointment_page');
-Route::middleware('web')->group(function(){
+Route::middleware('auth')->group(function(){
     Route::post('cart/store', [CartController::class, 'store'])->name('cart.store');
     Route::get('/dashboard', [DashbaordController::class, 'dashbaord'])->name('frontend.dashboard');
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');

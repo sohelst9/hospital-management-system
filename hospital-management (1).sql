@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 18, 2023 at 10:17 PM
+-- Generation Time: Jan 18, 2023 at 10:47 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -194,7 +194,7 @@ INSERT INTO `labtests` (`id`, `hospital_id`, `category_id`, `name`, `slug`, `pri
 (2, 1, 1, 'testsss', 'testsss', '403', '<p>DDGGG</p>', 'pexels-karolina-grabowska-4230623 (4).jpg', 2, '2023-01-18 11:00:58', '2023-01-18 15:53:09'),
 (3, 1, 1, 'test', 'test', '403', '<p>ddgd</p>', 'pexels-karolina-grabowska-4230623 (4).jpg', 2, '2023-01-18 11:28:03', '2023-01-18 11:28:03'),
 (4, 2, 3, 'test2', 'test2', '678', '<p>testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest</p>', 'pexels-karolina-grabowska-4230623 (6).jpg', 3, '2023-01-18 14:11:19', '2023-01-18 14:11:19'),
-(5, 1, 2, 'testrtytyu', 'testrtytyu', '12700', '<p>adfhgj;lkfdsaSDFGJKKJHG</p>', 'pexels-karolina-grabowska-4230623 (5).jpg', 2, '2023-01-18 15:08:08', '2023-01-18 15:08:17');
+(5, 1, 2, 'testrtytyu', 'testrtytyu', '12700', '<p>adfhgj;lkfdsaSDFGJKKJHG</p>', 'ssss.jpg', 2, '2023-01-18 15:08:08', '2023-01-18 15:08:17');
 
 -- --------------------------------------------------------
 

@@ -2,6 +2,15 @@
 @section('frontend_content')
 <section class="shop-grid">
     <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-6 offset-lg-3">
+                <div class="heading text-center mb-40">
+                    <h3 class="heading__title">Here All Lab tests</h3>
+                    <p class="heading__desc">Find your rechabale Lab test from here, Take your best treatment from any
+                        tests
+                </div><!-- /.heading -->
+            </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
       <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12">
          <div class="row">

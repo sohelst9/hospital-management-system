@@ -13,7 +13,7 @@
                     <div class="row align-items-center">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-7">
                             <div class="slide__content">
-                                <h2 class="slide__title">Providing Best Medical Care</h2>
+                                <h2 class="slide__title">Providing Best Hospital Services</h2>
                                 <p class="slide__desc">The health and well-being of our patients and their health care team
                                     will
                                     always be our priority, so we follow the best practices for cleanliness.</p>

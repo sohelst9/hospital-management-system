@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="Medcity - Medical Healthcare HTML5 Template">
     <link href="{{ asset('assets/frontend/assets/images/favicon/favicon.png') }}" rel="icon">
-    <title>Medcity - Medical Healthcare</title>
+    <title>Medcity - Hospial Services Center</title>
 
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Roboto:wght@400;700&display=swap">
@@ -71,19 +71,18 @@
                                                 <i class="icon-call3"></i>
                                             </div>
                                             <a href="tel:+201061245741" class="phone__number">
-                                                <i class="icon-phone"></i> <span>+2 01061245741</span>
+                                                <i class="icon-phone"></i> <span>01775465757</span>
                                             </a>
                                             <p>Please feel free to contact our friendly reception staff with any general
                                                 or medical enquiry.
                                             </p>
-                                            <a href="appointment.html" class="btn btn__secondary btn__link btn__block">
+                                            <a href="{{route('appointment_page')}}" class="btn btn__secondary btn__link btn__block">
                                                 <span>Make Appointment</span> <i class="icon-arrow-right"></i>
                                             </a>
                                         </div><!-- /.miniPopup-emergency -->
                                     </li>
                                     <li>
-                                        <i class="icon-phone"></i><a href="tel:+5565454117">Emergency Line: (002)
-                                            01061245741</a>
+                                        <i class="icon-phone"></i><a href="tel:+5565454117">Emergency Line: 01775465756</a>
                                     </li>
                                     <!-- <li>
                     <i class="icon-location"></i><a href="#">Location: Brooklyn, New York</a>
@@ -262,7 +261,7 @@
                                     </li>
                                 </ul>
                                 <div class="d-flex align-items-center">
-                                    <a href="contact-us.html" class="btn btn__primary btn__link mr-30">
+                                    <a href="{{route('contact')}}" class="btn btn__primary btn__link mr-30">
                                         <i class="icon-arrow-right"></i> <span>Get Directions</span>
                                     </a>
                                     <ul class="social-icons list-unstyled mb-0">

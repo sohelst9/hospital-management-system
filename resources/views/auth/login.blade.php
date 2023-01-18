@@ -39,10 +39,20 @@
                             <div class="form-group">
                                 <label for="email" class="text-info">Email:</label><br>
                                 <input type="email" name="email" id="email" class="form-control">
+                                @error('email')
+                                    <span class="text-danger">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="password" class="text-info">Password:</label><br>
                                 <input type="password" name="password" id="password" class="form-control">
+                                @error('password')
+                                    <span class="text-danger">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <br>
