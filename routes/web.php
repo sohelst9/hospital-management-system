@@ -24,6 +24,8 @@ Route::get('/', [FrontendController::class, 'index'])->name('index');
 Route::get('/hospital/{id}/category', [FrontendController::class, 'category'])->name('single.category');
 Route::get('/hospital/category/{id}/labtest', [FrontendController::class, 'labtest'])->name('labtest');
 Route::get('/hospital/category/labtest/single/{id}', [FrontendController::class, 'single_labtest'])->name('single.labtest');
+Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
+Route::get('/appointment_page', [FrontendController::class, 'appointment_page'])->name('appointment_page');
 Route::middleware('web')->group(function(){
     Route::post('cart/store', [CartController::class, 'store'])->name('cart.store');
     Route::get('/dashboard', [DashbaordController::class, 'dashbaord'])->name('frontend.dashboard');

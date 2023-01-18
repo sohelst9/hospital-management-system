@@ -248,7 +248,7 @@
                                     </a>
                                     <div class="product__action">
                                         <a href="{{route('single.labtest',$labtest->id)}}" class="btn btn__primary btn__rounded">
-                                            <i class="icon-cart"></i> <span>View Cart</span>
+                                            <i class="icon-cart"></i> <span>View Details</span>
                                         </a>
                                     </div><!-- /.product-action -->
                                 </div><!-- /.product-img -->

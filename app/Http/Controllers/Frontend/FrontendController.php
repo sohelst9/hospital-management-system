@@ -62,7 +62,7 @@ class FrontendController extends Controller
 
     public function appiontmant(Request $request)
     {
-        
+
         Appointment::create([
             'user_id'=>Auth::user()->id,
             'hospital_id'=>$request->hospital,
@@ -75,5 +75,17 @@ class FrontendController extends Controller
         ]);
 
         return back()->with('message', 'Appointmennt Booked Successfully !');
+    }
+
+    public function contact()
+    {
+        return view('frontend.contact');
+    }
+
+    public function appointment_page()
+    {
+        $hospitals = Hospital::get();
+        $categories = Category::get();
+        return view('frontend.appointment_page', compact('hospitals', 'categories'));
     }
 }

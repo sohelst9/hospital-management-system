@@ -17,10 +17,12 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/assets/css/style.css') }}">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-
-     alpha/css/bootstrap.css" rel="stylesheet">
+     alpha/css/bootstrap.css"
+        rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </head>
@@ -100,22 +102,13 @@
                     <div class="collapse navbar-collapse" id="mainNavigation">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav__item has-dropdown">
-                                <a href="{{ route('index') }}" data-toggle="dropdown"
+                                <a href="{{ route('index') }}"
                                     class=" nav__item-link active">Home</a>
                             </li><!-- /.nav-item -->
                             <li class="nav__item has-dropdown">
-                                <a href="about-us.html" data-toggle="dropdown" class=" nav__item-link">About Us</a>
+                                <a href="{{route('appointment_page')}}"  class=" nav__item-link">Appointment</a>
 
                             </li><!-- /.nav-item -->
-                            <li class="nav__item has-dropdown">
-                                <a href="shop.html" class=" nav__item-link">Services</a>
-                            </li><!-- /.nav-item -->
-
-                            <li class="nav__item has-dropdown">
-                                <a href="category.html" class=" nav__item-link">Categories</a>
-                            </li><!-- /.nav-item -->
-
-
 
                             <li class="nav__item has-dropdown">
                                 <a href="#" data-toggle="dropdown"
@@ -134,26 +127,26 @@
                                 </ul><!-- /.dropdown-menu -->
                             </li><!-- /.nav-item -->
                             <li class="nav__item">
-                                <a href="contact-us.html" class="nav__item-link">Contacts</a>
+                                <a href="{{route('contact')}}" class="nav__item-link">Contacts</a>
                             </li><!-- /.nav-item -->
                         </ul><!-- /.navbar-nav -->
                         <button class="close-mobile-menu d-block d-lg-none"><i class="fas fa-times"></i></button>
                     </div><!-- /.navbar-collapse -->
 
                     @auth('web')
-                    <div class="d-none d-xl-flex align-items-center position-relative ml-30">
-                        <a href="{{route('frontend.dashboard')}}" class="btn btn__primary btn__rounded ml-30">
-                            <i class="icon-calendar"></i>
-                            <span>Profile</span>
-                        </a>
-                    </div>
+                        <div class="d-none d-xl-flex align-items-center position-relative ml-30">
+                            <a href="{{ route('frontend.dashboard') }}" class="btn btn__primary btn__rounded ml-30">
+                                <i class="icon-calendar"></i>
+                                <span>Profile</span>
+                            </a>
+                        </div>
                     @else
-                    <div class="d-none d-xl-flex align-items-center position-relative ml-30">
-                        <a href="{{route('login')}}" class="btn btn__primary btn__rounded ml-30">
-                            <i class="icon-calendar"></i>
-                            <span>Login</span>
-                        </a>
-                    </div>
+                        <div class="d-none d-xl-flex align-items-center position-relative ml-30">
+                            <a href="{{ route('login') }}" class="btn btn__primary btn__rounded ml-30">
+                                <i class="icon-calendar"></i>
+                                <span>Login</span>
+                            </a>
+                        </div>
                     @endauth
 
                 </div><!-- /.container -->
@@ -179,22 +172,22 @@
                                     first and best
                                     choice for your family healthcare.
                                 </p>
-                                <a href="appointment.html" class="btn btn__primary btn__primary-style2 btn__link">
+                                <a href="{{route('appointment_page')}}" class="btn btn__primary btn__primary-style2 btn__link">
                                     <span>Make Appointment</span> <i class="icon-arrow-right"></i>
                                 </a>
                             </div><!-- /.footer-widget__content -->
                         </div><!-- /.col-xl-2 -->
                         <div class="col-sm-6 col-md-6 col-lg-2 offset-lg-1">
                             <div class="footer-widget-nav">
-                                <h6 class="footer-widget__title">Departments</h6>
+                                <h6 class="footer-widget__title">Hospital</h6>
                                 <nav>
                                     <ul class="list-unstyled">
-                                        <li><a href="#">Neurology Clinic</a></li>
-                                        <li><a href="#">Cardiology Clinic</a></li>
-                                        <li><a href="#">Pathology Clinic</a></li>
-                                        <li><a href="#">Laboratory Analysis</a></li>
-                                        <li><a href="#">Pediatric Clinic</a></li>
-                                        <li><a href="#">Cardiac Clinic</a></li>
+                                        @php
+                                            $hospitals = hospital();
+                                        @endphp
+                                        @foreach ($hospitals as $hospital)
+                                            <li><a href="#">{{$hospital->name}}</a></li>
+                                        @endforeach
                                     </ul>
                                 </nav>
                             </div><!-- /.footer-widget__content -->
@@ -204,11 +197,12 @@
                                 <h6 class="footer-widget__title">Links</h6>
                                 <nav>
                                     <ul class="list-unstyled">
-                                        <li><a href="#">About Us</a></li>
-                                        <li><a href="#">Our CLinic</a></li>
-                                        <li><a href="#">Our Doctors</a></li>
-                                        <li><a href="#">News & Media</a></li>
-                                        <li><a href="#">Appointments</a></li>
+                                        @php
+                                        $hospitals = hospital();
+                                    @endphp
+                                    @foreach ($hospitals as $hospital)
+                                        <li><a href="#">{{$hospital->name}}</a></li>
+                                    @endforeach
                                     </ul>
                                 </nav>
                             </div><!-- /.footer-widget__content -->
@@ -241,26 +235,6 @@
                     </div><!-- /.row -->
                 </div><!-- /.container -->
             </div><!-- /.footer-primary -->
-            <div class="footer-secondary">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-sm-12 col-md-6 col-lg-6">
-                            <span class="fz-14">&copy; 2020 DataSoft, All Rights Reserved. With Love by</span>
-                            <a class="fz-14 color-primary" href="http://themeforest.net/user/7oroof">7oroof.com</a>
-                        </div><!-- /.col-lg-6 -->
-                        <div class="col-sm-12 col-md-6 col-lg-6">
-                            <nav>
-                                <ul
-                                    class="list-unstyled footer__copyright-links d-flex flex-wrap justify-content-end mb-0">
-                                    <li><a href="#">Terms & Conditions</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Cookies</a></li>
-                                </ul>
-                            </nav>
-                        </div><!-- /.col-lg-6 -->
-                    </div><!-- /.row -->
-                </div><!-- /.container -->
-            </div><!-- /.footer-secondary -->
         </footer><!-- /.Footer -->
         <button id="scrollTopBtn"><i class="fas fa-long-arrow-alt-up"></i></button>
     </div><!-- /.wrapper -->
@@ -270,42 +244,38 @@
     <script src="{{ asset('assets/frontend/assets/js/main.js') }}"></script>
     @yield('footer_script')
     <script>
-        @if(Session::has('message'))
-        toastr.options =
-        {
-            "closeButton" : true,
-            "progressBar" : true
-        }
-                toastr.success("{{ session('message') }}");
+        @if (Session::has('message'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.success("{{ session('message') }}");
         @endif
 
-        @if(Session::has('error'))
-        toastr.options =
-        {
-            "closeButton" : true,
-            "progressBar" : true
-        }
-                toastr.error("{{ session('error') }}");
+        @if (Session::has('error'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.error("{{ session('error') }}");
         @endif
 
-        @if(Session::has('info'))
-        toastr.options =
-        {
-            "closeButton" : true,
-            "progressBar" : true
-        }
-                toastr.info("{{ session('info') }}");
+        @if (Session::has('info'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.info("{{ session('info') }}");
         @endif
 
-        @if(Session::has('warning'))
-        toastr.options =
-        {
-            "closeButton" : true,
-            "progressBar" : true
-        }
-                toastr.warning("{{ session('warning') }}");
+        @if (Session::has('warning'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.warning("{{ session('warning') }}");
         @endif
-      </script>
+    </script>
 </body>
 
 </html>
