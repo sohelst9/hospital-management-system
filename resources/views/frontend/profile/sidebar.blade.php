@@ -6,8 +6,8 @@
             Cart</a>
         <a href="{{route('order.list')}}" class='list-group-item list-group-item-action'>
             Order List</a>
-        <a href="" class='list-group-item list-group-item-action'>
-            Report</a>
+        <a href="{{route('user.appointment.report')}}" class='list-group-item list-group-item-action'>
+           Appointment Report</a>
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class='list-group-item list-group-item-action'>Logout
         </a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

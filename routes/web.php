@@ -30,6 +30,7 @@ Route::middleware('web')->group(function(){
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout');
     Route::get('/order/list', [DashbaordController::class, 'order_list'])->name('order.list');
+    Route::get('/user/appointment/report', [DashbaordController::class, 'user_appointment_report'])->name('user.appointment.report');
     Route::post('/appiontmant', [FrontendController::class, 'appiontmant'])->name('appiontmant');
 });
 // admin route---
