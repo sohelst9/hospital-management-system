@@ -14,7 +14,7 @@
         margin-top: 120px;
         margin-bottom: 120px;
         max-width: 600px;
-        height: 490px;
+        min-height: 520px;
         border: 1px solid #9C9C9C;
         background-color: #EAEAEA;
     }
@@ -41,7 +41,7 @@
                                 <label for="name" class="text-info">Name:</label><br>
                                 <input type="text" name="name" id="name" class="form-control" required>
                                 @error('name')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="text-danger">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -51,7 +51,7 @@
                                 <label for="email" class="text-info">Email:</label><br>
                                 <input type="email" name="email" id="email" class="form-control" required>
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="text-danger">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -61,15 +61,20 @@
                                 <label for="password" class="text-info">Password:</label><br>
                                 <input type="password" name="password" id="password" class="form-control" required>
                                 @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                                    <span class="text-danger">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="password" class="text-info">Confirm Password:</label><br>
                                 <input type="password" name="password_confirmation" id="password" class="form-control" required>
+                                @error('password_confirmation')
+                                    <span class="text-danger">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="form-group">
