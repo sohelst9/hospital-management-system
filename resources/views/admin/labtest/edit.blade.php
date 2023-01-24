@@ -82,6 +82,17 @@
                             </div>
 
                             <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="time_avilable">time availability <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="time_avilable" name="time_avilable" value="{{ $labtest->time_avilable }}" />
+                                    @error('time_avilable')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="price">Price <span
                                         class="text-danger">*</span></label>
                                 <div class="col-sm-10">

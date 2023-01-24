@@ -13,8 +13,8 @@
     #login .container #login-row #login-column #login-box {
         margin-top: 120px;
         margin-bottom: 120px;
-        max-width: 600px;
-        min-height: 520px;
+        max-width: 700px;
+        min-height: 700px;
         border: 1px solid #9C9C9C;
         background-color: #EAEAEA;
     }
@@ -51,6 +51,30 @@
                                 <label for="email" class="text-info">Email:</label><br>
                                 <input type="email" name="email" id="email" class="form-control" required>
                                 @error('email')
+                                    <span class="text-danger">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="birthday" class="text-info">Birthday:</label><br>
+                                <input type="date" class="form-control" name="birthday" id="birthday" required>
+                                @error('birthday')
+                                    <span class="text-danger">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="gender" class="text-info">Gender:</label><br>
+                                <select name="gender" id="gender" class="form-control">
+                                    <option value="">-Select-</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                                @error('birthday')
                                     <span class="text-danger">
                                         <strong>{{ $message }}</strong>
                                     </span>

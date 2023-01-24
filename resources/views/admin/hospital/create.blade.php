@@ -9,7 +9,7 @@
                 <div class="card mb-4">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <h5 class="mb-0">Add Hospital</h5>
-                        <a href="{{route('hospital.index')}}" class="btn btn-sm btn-primary">
+                        <a href="{{ route('hospital.index') }}" class="btn btn-sm btn-primary">
                             <box-icon name='left-arrow-alt'></box-icon>Back
                         </a>
                     </div>
@@ -17,7 +17,8 @@
                         <form action="{{ route('hospital.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="name"> Hospital Name <span class="text-danger">*</span></label>
+                                <label class="col-sm-2 col-form-label" for="name"> Hospital Name <span
+                                        class="text-danger">*</span></label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="name" name="name"
                                         placeholder="Enter Hospital Name" />
@@ -28,7 +29,8 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="email">Email <span class="text-danger">*</span></label>
+                                <label class="col-sm-2 col-form-label" for="email">Email <span
+                                        class="text-danger">*</span></label>
                                 <div class="col-sm-10">
                                     <input type="email" class="form-control" id="email" name="email"
                                         placeholder="Enter Hospital email" />
@@ -58,6 +60,18 @@
                             </div>
 
                             <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="location">Location <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="location" name="location"
+                                        placeholder="Enter Hospital location" />
+                                    @error('location')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="subtitle">Description</label>
                                 <div class="col-sm-10">
                                     <textarea name="description" id="description" class="form-control"></textarea>
@@ -65,7 +79,8 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="thumbnail">Thumbnail <span class="text-danger">*</span></label>
+                                <label class="col-sm-2 col-form-label" for="thumbnail">Thumbnail <span
+                                        class="text-danger">*</span></label>
                                 <div class="col-sm-10">
                                     <input type="file" class="form-control" id="thumbnail" name="thumbnail" />
                                     @error('thumbnail')
@@ -75,7 +90,8 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="username">Username <span class="text-danger">*</span></label>
+                                <label class="col-sm-2 col-form-label" for="username">Username <span
+                                        class="text-danger">*</span></label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="username" name="username"
                                         placeholder="Enter Hospital username" />
@@ -86,7 +102,8 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="password">Password <span class="text-danger">*</span></label>
+                                <label class="col-sm-2 col-form-label" for="password">Password <span
+                                        class="text-danger">*</span></label>
                                 <div class="col-sm-10">
                                     <input type="password" class="form-control" id="password" name="password"
                                         placeholder="Enter Hospital password" />

@@ -16,6 +16,7 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
+                            <th>Location</th>
                             <th>Image</th>
                             <th>Actions</th>
                         </tr>
@@ -25,6 +26,7 @@
                             <tr>
                                 <td>{{ ($hospitals->currentpage() - 1) * $hospitals->perpage() + $loop->index + 1 }}</td>
                                 <td>{{ $hospital->name }}</td>
+                                <td>{{ $hospital->location }}</td>
                                 <td><img src="{{ asset('uploads/hospital/thumbnail/' . $hospital->thumbnail) }}"
                                         width="100px" class="rounded-circle"></td>
                                 <td>

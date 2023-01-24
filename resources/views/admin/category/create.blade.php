@@ -34,10 +34,10 @@
                                         @if (Auth::guard('admin')->user()->Is_admin == 1)
                                             <option value="">-Select-</option>
                                             @foreach ($hospitals as $hospital)
-                                                <option value="{{$hospital->id}}">{{$hospital->name}}</option>
+                                                <option value="{{$hospital->id}}">{{$hospital->name}} ({{$hospital->location}})</option>
                                             @endforeach
                                         @else
-                                            <option value="{{ $hospitals->id }}">{{ $hospitals->name }}</option>
+                                            <option value="{{ $hospitals->id }}">{{ $hospitals->name }} ({{$hospitals->location}})</option>
                                         @endif
                                     </select>
                                     @error('name')

@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-6 offset-lg-3">
                     <div class="heading text-center mb-60">
-                        <h3 class="heading__title">{{ $category->name }}</h3>
+                        <h3 class="heading__title">{{ $category->name }} All Lab Test</h3>
                         <h2 class="heading__subtitle">Providing Medical Care For The Sickest In Our Community.</h2>
                     </div><!-- /.heading -->
                 </div><!-- /.col-lg-6 -->
@@ -30,9 +30,9 @@
                                                     <div class="product__action">
 
                                                         @auth
-                                                        <button type="submit" class="btn btn__primary btn__rounded">
-                                                            <i class="icon-cart"></i> <span>Add To Cart</span>
-                                                        </button>
+                                                            <button type="submit" class="btn btn__primary btn__rounded">
+                                                                <i class="icon-cart"></i> <span>Add To Cart</span>
+                                                            </button>
                                                         @else
                                                             <a href="{{ route('login') }}"
                                                                 class="btn btn__secondary btn__rounded">add to cart</a>
@@ -40,9 +40,14 @@
                                                     </div><!-- /.product-action -->
                                                 </div><!-- /.product-img -->
                                                 <div class="product__info">
+                                                    <span class="text-info">Hospital :
+                                                        {{ $labtest?->hospital->name }}</span>
+                                                    <p class="text-primary">Location : {{ $labtest?->hospital->location }}
+                                                    </p>
                                                     <h4 class="product__title"><a
                                                             href="{{ route('single.labtest', $labtest->id) }}">{{ $labtest->name }}</a>
                                                     </h4>
+                                                    <span>Avilable Time : {{$labtest->time_avilable}}</span><br>
                                                     <span class="product__price">{{ $labtest->price }} &#2547;</span>
                                                 </div><!-- /.product-content -->
                                             </div><!-- /.product-item -->

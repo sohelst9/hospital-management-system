@@ -7,6 +7,7 @@ use App\Models\Admin\Category;
 use App\Models\Admin\Hospital;
 use App\Models\Admin\Labtest;
 use App\Models\LabTestReport;
+use App\Models\LabtestTime;
 use App\Models\Order;
 use App\Models\OrderLabTestDetails;
 use Illuminate\Http\Request;
@@ -25,10 +26,10 @@ class LabTestController extends Controller
     {
         $admin_id = Auth::guard('admin')->user()->id;
         if (Auth::guard('admin')->user()->Is_admin == 1) {
-            $labtests = Labtest::paginate(10);
+            $labtests = Labtest::orderBy('id', 'DESC')->paginate(10);
         } else {
             $hospital = Hospital::where('admin_id', Auth::guard('admin')->user()->id)->first();
-            $labtests = Labtest::where('hospital_id', $hospital->id)->paginate();
+            $labtests = Labtest::where('hospital_id', $hospital->id)->orderBy('id', 'DESC')->paginate();
         }
 
         return view('admin.labtest.index', compact('labtests'));
@@ -68,6 +69,7 @@ class LabTestController extends Controller
             'category_id' => $request->category,
             'name' => $request->name,
             'slug' => Str::slug($request->name, '-'),
+            'time_avilable' => $request->time_avilable,
             'price' => $request->price,
             'description' => $request->description,
             'thumbnail' => $file,
@@ -100,6 +102,7 @@ class LabTestController extends Controller
             'category_id' => $request->category,
             'name' => $request->name,
             'slug' => Str::slug($request->name, '-'),
+            'time_avilable' => $request->time_avilable,
             'price' => $request->price,
             'description' => $request->description
         ]);
@@ -140,8 +143,7 @@ class LabTestController extends Controller
     {
         if (Auth::guard('admin')->user()->Is_admin == 1) {
             $test_reports = OrderLabTestDetails::get();
-        }
-        else {
+        } else {
             $login_id = Auth::guard('admin')->user()->id;
             $hospital = Hospital::where('admin_id', $login_id)->first();
             $test_reports = OrderLabTestDetails::where('hospital_id', $hospital->id)->get();
@@ -155,16 +157,13 @@ class LabTestController extends Controller
         return view('admin.labtestorder.labtest_report_create', compact('id'));
     }
 
-    public function test_status($id)
+    public function test_status($test_id, $status)
     {
-        $test_report = OrderLabTestDetails::where('id', $id)->first();
-        if ($test_report->status == 0) {
-            OrderLabTestDetails::find($test_report->id)->update([
-                'status' => 1
-            ]);
-
-            return back()->with('success', 'Change Status');
-        }
+        $test_report = OrderLabTestDetails::where('id', $test_id)->first();
+        OrderLabTestDetails::find($test_report->id)->update([
+            'status' => $status
+        ]);
+        return back()->with('success', 'Change Status');
     }
 
     public function testreport_store(Request $request)
@@ -182,5 +181,19 @@ class LabTestController extends Controller
             'report_file' => $file,
         ]);
         return redirect()->route('admin.labtest.report')->with('success', 'Labtest Report Added  !');
+    }
+
+    public function add_time($id)
+    {
+        return view('admin.labtestorder.labtest_add_time', compact('id'));
+    }
+
+    public function add_time_store(Request $request)
+    {
+       LabtestTime::create([
+            'labtest_order_id'=>$request->labtest_order_id,
+            'time'=>$request->time
+       ]);
+       return redirect()->route('admin.labtest.report')->with('success', 'Lab Test Time Addded !');
     }
 }

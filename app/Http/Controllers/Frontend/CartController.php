@@ -37,23 +37,8 @@ class CartController extends Controller
 
     public function checkout(Request $request)
     {
+         $request->all();
         $user_id = Auth::user()->id;
-        // // order table
-        // $order_id = Order::insertGetId([
-        //     'user_id' => $user_id,
-        //     'hospital_id' => $user_id,
-        //     'total' => $request->total,
-        //     'payment_method' => $request->payment_method,
-        //     'fname' => $request->firstName,
-        //     'lname' => $request->lastName,
-        //     'email' => $request->email,
-        //     'address' => $request->address,
-        //     'labtest_id' => $cart->labtest_id,
-        //     'quantity' => $cart->quantity,
-        //     'created_at' => now(),
-
-        // ]);
-
         // //order  details table
         $cart_items = Cart::where('user_id', $user_id)->get();
         foreach ($cart_items as $cart) {
@@ -65,6 +50,7 @@ class CartController extends Controller
             'fname' => $request->firstName,
             'lname' => $request->lastName,
             'email' => $request->email,
+            'date' => $request->date,
             'address' => $request->address,
             'labtest_id' => $cart->labtest_id,
             'quantity' => $cart->quantity,
@@ -77,5 +63,12 @@ class CartController extends Controller
             $cart_delete->delete();
         }
         return redirect()->route('frontend.dashboard')->with('message', 'Your Order Submitted Successfully');
+    }
+
+    //cart delete----
+    public function destroy($id)
+    {
+        $cart = Cart::findOrFail($id)->delete();
+        return back()->with('message', 'Cart Deleted');
     }
 }

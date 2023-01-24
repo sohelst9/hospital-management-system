@@ -17,6 +17,7 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Hospital Name</th>
+                            <th>Hospital Location</th>
                             <th>Image</th>
                             <th>Actions</th>
                         </tr>
@@ -27,6 +28,7 @@
                                 <td>{{ ($categories->currentpage() - 1) * $categories->perpage() + $loop->index + 1 }}</td>
                                 <td>{{ $category->name }}</td>
                                 <td>{{ $category?->hospital->name }}</td>
+                                <td>{{ $category?->hospital->location }}</td>
                                 <td><img src="{{ asset('uploads/category/' . $category->thumbnail) }}"
                                         width="100px" class="rounded-circle"></td>
                                 <td>

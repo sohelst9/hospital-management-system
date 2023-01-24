@@ -36,10 +36,10 @@
                                         @if (Auth::guard('admin')->user()->Is_admin == 1)
                                             <option value="">-select-</option>
                                             @foreach ($hospitals as $hospital)
-                                                <option value="{{ $hospital->id }}">{{ $hospital->name }}</option>
+                                                <option value="{{ $hospital->id }}">{{ $hospital->name }} ({{$hospital->location}})</option>
                                             @endforeach
                                         @else
-                                            <option value="{{ $hospitals->id }}">{{ $hospitals->name }}</option>
+                                            <option value="{{ $hospitals->id }}">{{ $hospitals->name }} ({{$hospitals->location}})</option>
                                         @endif
                                     </select>
                                     @error('name')
@@ -67,6 +67,17 @@
                                     @endif
 
                                     @error('name')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="time_avilable">time availability <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="time_avilable" name="time_avilable" />
+                                    @error('time_avilable')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>

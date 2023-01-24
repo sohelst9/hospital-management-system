@@ -1,8 +1,8 @@
 @extends('layouts.frontend.app')
 @section('frontend_content')
     <!-- ============================
-            Slider
-        ============================== -->
+                Slider
+            ============================== -->
     <section class="slider">
         <div class="slick-carousel m-slides-0"
             data-slick='{"slidesToShow": 1, "arrows": true, "dots": false, "speed": 700,"fade": true,"cssEase": "linear"}'>
@@ -102,8 +102,8 @@
     </section><!-- /.slider -->
 
     <!-- ======================
-            Hospitals
-          ========================= -->
+                Hospitals
+              ========================= -->
     <section class="team-layout2 pb-80">
         <div class="container">
             <div class="row">
@@ -128,10 +128,12 @@
                                 </div><!-- /.member-img -->
                                 <div class="member__info">
                                     <h5 class="member__name"><a
-                                            href="{{ route('single.category',$hospital->id) }}">{{ $hospital->name }}</a></h5>
+                                            href="{{ route('single.category', $hospital->id) }}">{{ $hospital->name }}</a>
+                                    </h5>
+                                    <span class="mb-2 text-success">Location : {{ $hospital->location }}</span>
                                     <p class="member__desc">{{ strip_tags(Str::limit($hospital->description, 120)) }}</p>
                                     <div class="mt-20 d-flex flex-wrap justify-content-between align-items-center">
-                                        <a href="{{ route('single.category',$hospital->id) }}"
+                                        <a href="{{ route('single.category', $hospital->id) }}"
                                             class="btn btn__secondary btn__link btn__rounded">
                                             <span>Read More</span>
                                             <i class="icon-arrow-right"></i>
@@ -152,8 +154,8 @@
         </div><!-- /.container -->
     </section><!-- /.Team -->
     <!-- ========================
-        About Layout 2
-        =========================== -->
+            About Layout 2
+            =========================== -->
     <section class="about-layout2 pb-0">
         <div class="container">
             <div class="row">
@@ -220,8 +222,8 @@
     </section><!-- /.About Layout 2 -->
 
     <!-- ========================
-              Services Layout 1
-          =========================== -->
+                  Services Layout 1
+              =========================== -->
     {{-- <section class="services-layout1 services-carousel">
         <div class="bg-img"><img src="{{ asset('assets/frontend/assets/images/backgrounds/2.jpg') }}" alt="background">
         </div>
@@ -268,10 +270,11 @@
 
 
     <!-- ======================
-          Features Layout 2
-          ========================= -->
+              Features Layout 2
+              ========================= -->
     <section class="features-layout2 pt-130 bg-overlay bg-overlay-primary">
-        <div class="bg-img"><img src="{{asset('assets/frontend/assets/images/backgrounds/2.jpg')}}" alt="background"></div>
+        <div class="bg-img"><img src="{{ asset('assets/frontend/assets/images/backgrounds/2.jpg') }}" alt="background">
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-8 offset-lg-1">
@@ -307,7 +310,8 @@
                 <div class="col-sm-6 col-md-6 col-lg-3">
                     <div class="feature-item">
                         <div class="feature__img">
-                            <img src="{{asset('assets/frontend/assets/images/services/1.jpg')}}" alt="service" loading="lazy">
+                            <img src="{{ asset('assets/frontend/assets/images/services/1.jpg') }}" alt="service"
+                                loading="lazy">
                         </div><!-- /.feature__img -->
                         <div class="feature__content">
                             <div class="feature__icon">
@@ -324,7 +328,8 @@
                 <div class="col-sm-6 col-md-6 col-lg-3">
                     <div class="feature-item">
                         <div class="feature__img">
-                            <img src="{{asset('assets/frontend/assets/images/services/2.jpg')}}" alt="service" loading="lazy">
+                            <img src="{{ asset('assets/frontend/assets/images/services/2.jpg') }}" alt="service"
+                                loading="lazy">
                         </div><!-- /.feature__img -->
                         <div class="feature__content">
                             <div class="feature__icon">
@@ -341,7 +346,8 @@
                 <div class="col-sm-6 col-md-6 col-lg-3">
                     <div class="feature-item">
                         <div class="feature__img">
-                            <img src="{{asset('assets/frontend/assets/images/services/3.jpg')}}" alt="service" loading="lazy">
+                            <img src="{{ asset('assets/frontend/assets/images/services/3.jpg') }}" alt="service"
+                                loading="lazy">
                         </div><!-- /.feature__img -->
                         <div class="feature__content">
                             <div class="feature__icon">
@@ -358,7 +364,8 @@
                 <div class="col-sm-6 col-md-6 col-lg-3">
                     <div class="feature-item">
                         <div class="feature__img">
-                            <img src="{{asset('assets/frontend/assets/images/services/4.jpg')}}" alt="service" loading="lazy">
+                            <img src="{{ asset('assets/frontend/assets/images/services/4.jpg') }}" alt="service"
+                                loading="lazy">
                         </div><!-- /.feature__img -->
                         <div class="feature__content">
                             <div class="feature__icon">
@@ -375,7 +382,8 @@
                 <div class="col-sm-6 col-md-6 col-lg-3">
                     <div class="feature-item">
                         <div class="feature__img">
-                            <img src="{{asset('assets/frontend/assets/images/services/5.jpg')}}" alt="service" loading="lazy">
+                            <img src="{{ asset('assets/frontend/assets/images/services/5.jpg') }}" alt="service"
+                                loading="lazy">
                         </div><!-- /.feature__img -->
                         <div class="feature__content">
                             <div class="feature__icon">
@@ -392,7 +400,8 @@
                 <div class="col-sm-6 col-md-6 col-lg-3">
                     <div class="feature-item">
                         <div class="feature__img">
-                            <img src="{{asset('assets/frontend/assets/images/services/6.jpg')}}" alt="service" loading="lazy">
+                            <img src="{{ asset('assets/frontend/assets/images/services/6.jpg') }}" alt="service"
+                                loading="lazy">
                         </div><!-- /.feature__img -->
                         <div class="feature__content">
                             <div class="feature__icon">
@@ -409,7 +418,8 @@
                 <div class="col-sm-6 col-md-6 col-lg-3">
                     <div class="feature-item">
                         <div class="feature__img">
-                            <img src="{{asset('assets/frontend/assets/images/services/7.jpg')}}" alt="service" loading="lazy">
+                            <img src="{{ asset('assets/frontend/assets/images/services/7.jpg') }}" alt="service"
+                                loading="lazy">
                         </div><!-- /.feature__img -->
                         <div class="feature__content">
                             <div class="feature__icon">
@@ -426,7 +436,8 @@
                 <div class="col-sm-6 col-md-6 col-lg-3">
                     <div class="feature-item">
                         <div class="feature__img">
-                            <img src="{{asset('assets/frontend/assets/images/services/8.jpg')}}" alt="service" loading="lazy">
+                            <img src="{{ asset('assets/frontend/assets/images/services/8.jpg') }}" alt="service"
+                                loading="lazy">
                         </div><!-- /.feature__img -->
                         <div class="feature__content">
                             <div class="feature__icon">
@@ -458,16 +469,15 @@
 
 
     <!-- ==========================
-              contact layout 3
-          =========================== -->
-    <section class="contact-layout3 bg-overlay bg-overlay-primary-gradient pb-60">
-        <div class="bg-img"><img src="{{asset('assets/frontend/assets/images/banners/3.jpg')}}" alt="banner"></div>
+                  contact layout 3
+              =========================== -->
+    {{-- <section class="contact-layout3 bg-overlay bg-overlay-primary-gradient pb-60">
+        <div class="bg-img"><img src="{{ asset('assets/frontend/assets/images/banners/3.jpg') }}" alt="banner"></div>
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-7">
                     <div class="contact-panel mb-50">
-                        <form class="" method="post" action="{{route('appiontmant')}}"
-                            id="">
+                        <form class="" method="post" action="{{ route('appiontmant') }}" id="">
                             @csrf
                             <div class="row">
                                 <div class="col-sm-12">
@@ -484,7 +494,7 @@
                                         <select class="form-control" name="hospital" id="hospital" required>
                                             <option value="">Choose Hospital</option>
                                             @foreach ($hospitals as $hospital)
-                                                <option value="{{$hospital->id}}">{{$hospital->name}}</option>
+                                                <option value="{{ $hospital->id }}">{{ $hospital->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -493,7 +503,7 @@
                                     <select name="category" id="categories" class="form-control" required>
                                         <option value="">Choose Category</option>
                                         @foreach ($categories as $category)
-                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                 </div><!-- /.col-lg-6 -->
@@ -534,15 +544,15 @@
                                 </div><!-- /.col-lg-4 -->
                                 <div class="col-12">
                                     @auth
-                                    <button type="submit"
-                                        class="btn btn__secondary btn__rounded btn__block btn__xhight mt-10">
-                                        <span>Book Appointment</span> <i class="icon-arrow-right"></i>
-                                    </button>
+                                        <button type="submit"
+                                            class="btn btn__secondary btn__rounded btn__block btn__xhight mt-10">
+                                            <span>Book Appointment</span> <i class="icon-arrow-right"></i>
+                                        </button>
                                     @else
-                                    <a href="{{route('login')}}"
-                                        class="btn btn__secondary btn__rounded btn__block btn__xhight mt-10">
-                                        <span>Book Appointment</span> <i class="icon-arrow-right"></i>
-                                </a>
+                                        <a href="{{ route('login') }}"
+                                            class="btn btn__secondary btn__rounded btn__block btn__xhight mt-10">
+                                            <span>Book Appointment</span> <i class="icon-arrow-right"></i>
+                                        </a>
                                     @endauth
                                 </div><!-- /.col-lg-12 -->
                             </div><!-- /.row -->
@@ -569,38 +579,38 @@
                     <div class="slick-carousel clients-light mt-20"
                         data-slick='{"slidesToShow": 3, "arrows": false, "dots": false, "autoplay": true,"autoplaySpeed": 2000, "infinite": true, "responsive": [ {"breakpoint": 992, "settings": {"slidesToShow": 3}}, {"breakpoint": 767, "settings": {"slidesToShow": 2}}, {"breakpoint": 480, "settings": {"slidesToShow": 2}}]}'>
                         <div class="client">
-                            <img src="{{asset('assets/frontend/assets/images/clients/1.png')}}" alt="client">
-                            <img src="{{asset('assets/frontend/assets/images/clients/1.png')}}" alt="client">
+                            <img src="{{ asset('assets/frontend/assets/images/clients/1.png') }}" alt="client">
+                            <img src="{{ asset('assets/frontend/assets/images/clients/1.png') }}" alt="client">
                         </div><!-- /.client -->
                         <div class="client">
-                            <img src="{{asset('assets/frontend/assets/images/clients/2.png')}}" alt="client">
-                            <img src="{{asset('assets/frontend/assets/images/clients/2.png')}}" alt="client">
+                            <img src="{{ asset('assets/frontend/assets/images/clients/2.png') }}" alt="client">
+                            <img src="{{ asset('assets/frontend/assets/images/clients/2.png') }}" alt="client">
                         </div><!-- /.client -->
                         <div class="client">
-                            <img src="{{asset('assets/frontend/assets/images/clients/3.png')}}" alt="client">
-                            <img src="{{asset('assets/frontend/assets/images/clients/3.png')}}" alt="client">
+                            <img src="{{ asset('assets/frontend/assets/images/clients/3.png') }}" alt="client">
+                            <img src="{{ asset('assets/frontend/assets/images/clients/3.png') }}" alt="client">
                         </div><!-- /.client -->
                         <div class="client">
-                            <img src="{{asset('assets/frontend/assets/images/clients/4.png')}}" alt="client">
-                            <img src="{{asset('assets/frontend/assets/images/clients/4.png')}}" alt="client">
+                            <img src="{{ asset('assets/frontend/assets/images/clients/4.png') }}" alt="client">
+                            <img src="{{ asset('assets/frontend/assets/images/clients/4.png') }}" alt="client">
                         </div><!-- /.client -->
                         <div class="client">
-                            <img src="{{asset('assets/frontend/assets/images/clients/5.png')}}" alt="client">
-                            <img src="{{asset('assets/frontend/assets/images/clients/5.png')}}" alt="client">
+                            <img src="{{ asset('assets/frontend/assets/images/clients/5.png') }}" alt="client">
+                            <img src="{{ asset('assets/frontend/assets/images/clients/5.png') }}" alt="client">
                         </div><!-- /.client -->
                         <div class="client">
-                            <img src="{{asset('assets/frontend/assets/images/clients/6.png')}}" alt="client">
-                            <img src="{{asset('assets/frontend/assets/images/clients/6.png')}}" alt="client">
+                            <img src="{{ asset('assets/frontend/assets/images/clients/6.png') }}" alt="client">
+                            <img src="{{ asset('assets/frontend/assets/images/clients/6.png') }}" alt="client">
                         </div><!-- /.client -->
                         <div class="client">
-                            <img src="{{asset('assets/frontend/assets/images/clients/7.png')}}" alt="client">
-                            <img src="{{asset('assets/frontend/assets/images/clients/7.png')}}" alt="client">
+                            <img src="{{ asset('assets/frontend/assets/images/clients/7.png') }}" alt="client">
+                            <img src="{{ asset('assets/frontend/assets/images/clients/7.png') }}" alt="client">
                         </div><!-- /.client -->
                     </div><!-- /.carousel -->
                 </div><!-- /.col-lg-5 -->
             </div><!-- /.row -->
         </div><!-- /.container -->
-    </section><!-- /.contact layout 3 -->
+    </section><!-- /.contact layout 3 --> --}}
 @endsection
 @section('footer_script')
     {{-- <script>

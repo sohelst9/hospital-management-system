@@ -52,8 +52,9 @@
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-6 offset-lg-3">
                     <div class="heading text-center mb-60">
-                        <h3 class="heading__title">{{$hospital->name}}</h3>
-                        <h2 class="heading__subtitle">Providing Medical Care For The Sickest In Our Community.</h2>
+                        <h3 style="margin:0">{{$hospital->name}} All Services</h3>
+                        <span class="text-success">Location : {{$hospital->location}}</span>
+                        <h2 class="heading__subtitle mt-3">Providing Medical Care For The Sickest In Our Community.</h2>
                     </div><!-- /.heading -->
                 </div><!-- /.col-lg-6 -->
             </div><!-- /.row -->

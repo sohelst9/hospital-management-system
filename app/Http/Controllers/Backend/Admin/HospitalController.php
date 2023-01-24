@@ -32,6 +32,7 @@ class HospitalController extends Controller
             'name'=>'required',
             'email'=>'required',
             'username'=>'required',
+            'location'=>'required',
             'password'=>'required',
             'thumbnail'=>'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
         ]);
@@ -53,6 +54,7 @@ class HospitalController extends Controller
             'name'=>$request->name,
             'slug'=>Str::slug($request->name, '-'),
             'sub_title'=>$request->subtitle,
+            'location'=>$request->location,
             'description'=>$request->description,
             'thumbnail'=>$file,
             'created_at'=>now()
@@ -70,11 +72,12 @@ class HospitalController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate(['name'=>'required']);
+        $request->validate(['name'=>'required', 'location'=>'required']);
         Hospital::find($id)->update([
             'name'=>$request->name,
             'slug'=>Str::slug($request->name, '-'),
             'sub_title'=>$request->subtitle,
+            'location'=>$request->location,
             'description'=>$request->description
         ]);
         if($request->hasfile('thumbnail')){

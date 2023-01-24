@@ -120,12 +120,12 @@
             </a>
         </li>
 
-        <!-- Appointment -->
+        {{-- <!-- Appointment -->
         <li class="menu-item {{ request()->routeIs('admin.appointment') ? 'active' : '' }}">
             <a href="{{ route('admin.appointment') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Appointment List</div>
             </a>
-        </li>
+        </li> --}}
     </ul>
 </aside>

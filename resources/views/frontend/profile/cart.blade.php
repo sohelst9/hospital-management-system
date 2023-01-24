@@ -48,7 +48,7 @@
                                         <tbody>
                                             @php
                                                 $total = 0;
-                                                $grand_total =0;
+                                                $grand_total = 0;
                                             @endphp
                                             @forelse ($carts as $key=>$cart)
                                                 <tr>
@@ -61,7 +61,8 @@
                                                     @endphp
                                                     <td>{{ $cart->quantity }}</td>
                                                     <td>{{ $subtotal }}</td>
-                                                    <td><a href="" class="btns">Delete</a></td>
+                                                    <td><a href="{{ route('cart.delete', $cart->id) }}"
+                                                            class="btns">Delete</a></td>
                                                 </tr>
                                                 @php
                                                     $total = $subtotal;
@@ -72,7 +73,7 @@
                                         </tbody>
                                     </table>
 
-                                    <form action="{{route('checkout')}}" method="POST">
+                                    <form action="{{ route('checkout') }}" method="POST">
                                         @csrf
                                         <div class="container">
                                             <div class="row">
@@ -81,20 +82,32 @@
                                                     <h4 class="mb-3">Billing address</h4>
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
+                                                            <label for="email">Email</label>
+                                                            <input type="email" class="form-control" name="email"
+                                                                placeholder="you@example.com">
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="email">Date</label>
+                                                            <div class="form-group form-group-date">
+                                                                <i class="icon-calendar form-group-icon"></i>
+                                                                <input type="date" class="form-control" id="contact-date"
+                                                                    name="date" required="">
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-3">
                                                             <label for="firstName">First name</label>
                                                             <input type="text" class="form-control"
                                                                 name="firstName"value="" required>
                                                         </div>
                                                         <div class="col-md-6 mb-3">
                                                             <label for="lastName">Last name</label>
-                                                            <input type="text" class="form-control" name="lastName" required>
+                                                            <input type="text" class="form-control" name="lastName"
+                                                                required>
                                                         </div>
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <label for="email">Email</label>
-                                                        <input type="email" class="form-control" name="email"
-                                                            placeholder="you@example.com">
                                                     </div>
 
                                                     <div class="mb-3">
@@ -110,17 +123,19 @@
 
                                                     <div class="d-block my-3">
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="payment_method" id="flexRadioDefault1" value="1">
-                                                            <label class="form-check-label" for="flexRadioDefault1" >
-                                                              Cash On Delevery
+                                                            <input class="form-check-input" type="radio"
+                                                                name="payment_method" id="flexRadioDefault1" value="1">
+                                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                                Cash On Delevery
                                                             </label>
-                                                          </div>
-                                                          <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="payment_method" id="flexRadioDefault2" value="2">
-                                                            <label class="form-check-label" for="flexRadioDefault2" >
-                                                              SSL
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="payment_method" id="flexRadioDefault2" value="2">
+                                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                                SSL
                                                             </label>
-                                                          </div>
+                                                        </div>
                                                     </div>
                                                     <hr>
                                                     <br>
@@ -129,7 +144,8 @@
                                                             <button type="submit" class="checkout">Order</button>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <input type="hidden" name="total" value="{{ $total }}">
+                                                            <input type="hidden" name="total"
+                                                                value="{{ $total }}">
                                                             <h5>Total : <span>{{ $grand_total }} </span>&#2547;</h5>
                                                         </div>
                                                     </div>
@@ -145,4 +161,13 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('footer_script')
+    <script type="text/javascript">
+        window.onload = function() { //from ww  w . j  a  va2s. c  o  m
+            var today = new Date().toISOString().split('T')[0];
+            document.getElementsByName("date")[0].setAttribute('min', today);
+        }
+    </script>
 @endsection

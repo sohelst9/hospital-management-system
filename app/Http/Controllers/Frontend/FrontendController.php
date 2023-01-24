@@ -90,10 +90,28 @@ class FrontendController extends Controller
         return view('frontend.appointment_page', compact('hospitals', 'categories'));
     }
 
-    public function all_labs_test()
+    public function all_labs_test(Request $request)
     {
-
-        $labtests = Labtest::with('hospital')->get();
+        $labtests = Labtest::query()
+        ->where(function ($q) use ($request){
+            if($request->search){
+                $q->where('name', 'LIKE','%'.$request->search.'%');
+            }
+        })
+        ->get();
         return view('frontend.all_labtest', compact('labtests'));
+    }
+
+    public function location_by_hospital(Request $request)
+    {
+        $hospitals = Hospital::query()
+        ->where(function ($q) use ($request){
+            if($request->search){
+                $q->where('location', 'LIKE','%'.$request->search.'%')
+                ->orWhere('name', 'LIKE', '%'.$request->search.'%');
+            }
+        })
+        ->get();
+        return view('frontend.hospital.locationByHospital', compact('hospitals'));
     }
 }

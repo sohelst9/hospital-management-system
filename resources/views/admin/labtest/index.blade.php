@@ -16,6 +16,8 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
+                            <th>Hospital</th>
+                            <th>Location</th>
                             <th>Category</th>
                             <th>Price</th>
                             <th>Image</th>
@@ -27,10 +29,12 @@
                             <tr>
                                 <td>{{ ($labtests->currentpage() - 1) * $labtests->perpage() + $loop->index + 1 }}</td>
                                 <td>{{ $labtest->name }}</td>
+                                <td>{{ $labtest?->hospital->name }}</td>
+                                <td>{{ $labtest?->hospital->location }}</td>
                                 <td>{{ $labtest?->category->name }}</td>
                                 <td>{{ $labtest->price ?? '0' }}</td>
                                 <td><img src="{{ asset('uploads/labtest/' . $labtest->thumbnail) }}"
-                                        width="100px" class="rounded-circle"></td>
+                                        width="70px" height="65px" class="rounded-circle"></td>
                                 <td>
                                     <div class="d-flex">
                                         <a href="{{ route('labtest.edit', $labtest->id) }}"
@@ -46,8 +50,8 @@
                         @endforeach
 
                     </tbody>
-                    {{ $labtests->links() }}
                 </table>
+                {{ $labtests->links() }}
             </div>
         </div>
         <!--/ Bootstrap Table with Header Dark -->

@@ -3,14 +3,24 @@
 <section class="shop-grid">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-6 offset-lg-3">
-                <div class="heading text-center mb-40">
-                    <h3 class="heading__title">Here All Lab tests</h3>
-                    <p class="heading__desc">Find your rechabale Lab test from here, Take your best treatment from any
-                        tests
+            <div class="col-md-6">
+                <div class="heading mb-40">
+                    <a href="{{route('all_labs.test')}}"><h3 class="heading__title">Here All Lab tests</h3></a>
                 </div><!-- /.heading -->
             </div><!-- /.col-lg-6 -->
+            <div class="col-md-6">
+                <div class="">
+                    <form class="header-topbar__search" action="{{route('all_labs.test')}}" method="GET">
+                        <div class="">
+                            <input type="text" name="search" class="form-control" placeholder="Search Lab test....">
+                        </div>
+                      </form>
+                </div>
+            </div>
         </div><!-- /.row -->
+        <br>
+        <hr>
+        <hr>
       <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12">
          <div class="row">
@@ -39,9 +49,12 @@
                             </div><!-- /.product-action -->
                         </div><!-- /.product-img -->
                         <div class="product__info">
+                            <span class="text-info">Hospital : {{$labtest?->hospital->name}}</span>
+                            <p class="text-primary">Location : {{$labtest?->hospital->location}}</p>
                             <h4 class="product__title"><a
                                     href="{{ route('single.labtest', $labtest->id) }}">{{ $labtest->name }}</a>
                             </h4>
+                            <span>Avilable Time : {{$labtest->time_avilable}}</span><br>
                             <span class="product__price">{{ $labtest->price }} &#2547;</span>
                         </div><!-- /.product-content -->
                     </div><!-- /.product-item -->

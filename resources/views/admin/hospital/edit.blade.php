@@ -14,7 +14,8 @@
                         </a>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('hospital.update', $hospital->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('hospital.update', $hospital->id) }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row mb-3">
@@ -34,6 +35,18 @@
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="subtitle" name="subtitle"
                                         placeholder="Enter Hospital subtitle" value="{{ $hospital->sub_title }}" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="location">Location <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="location" name="location"
+                                        value="{{ $hospital->location }}" />
+                                    @error('location')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
 

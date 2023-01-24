@@ -21,8 +21,7 @@
         rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
@@ -76,9 +75,9 @@
                                             <p>Please feel free to contact our friendly reception staff with any general
                                                 or medical enquiry.
                                             </p>
-                                            <a href="{{route('appointment_page')}}" class="btn btn__secondary btn__link btn__block">
+                                            {{-- <a href="{{route('appointment_page')}}" class="btn btn__secondary btn__link btn__block">
                                                 <span>Make Appointment</span> <i class="icon-arrow-right"></i>
-                                            </a>
+                                            </a> --}}
                                         </div><!-- /.miniPopup-emergency -->
                                     </li>
                                     <li>
@@ -97,7 +96,10 @@
                                         <li><a href="#"><i class="fab fa-instagram"></i></a></li>
                                         <li><a href="#"><i class="fab fa-twitter"></i></a></li>
                                     </ul><!-- /.social-icons -->
-
+                                    <form class="header-topbar__search" action="{{route('location.by.hospital')}}" method="GET">
+                                        <input type="text" name="search" class="form-control" placeholder="Hospital or Location">
+                                        <button class="header-topbar__search-btn"><i class="fa fa-search"></i></button>
+                                      </form>
                                 </div>
                             </div>
                         </div><!-- /.col-12 -->
@@ -120,20 +122,20 @@
                             <li class="nav__item has-dropdown">
                                 <a href="{{ route('index') }}" class=" nav__item-link active">Home</a>
                             </li><!-- /.nav-item -->
-                            <li class="nav__item has-dropdown">
+                            {{-- <li class="nav__item has-dropdown">
                                 <a href="{{ route('appointment_page') }}" class=" nav__item-link">Appointment</a>
 
+                            </li><!-- /.nav-item --> --}}
+
+                            <li class="nav__item has-dropdown">
+                                <a href="{{ route('all_labs.test') }}" class=" nav__item-link">All Tests</a>
+
                             </li><!-- /.nav-item -->
 
                             <li class="nav__item has-dropdown">
-                                <a href="{{ route('all_labs.test') }}" class=" nav__item-link">All Test</a>
-
-                            </li><!-- /.nav-item -->
-
-                            <li class="nav__item has-dropdown">
-                                <a href="#" data-toggle="dropdown"
-                                    class="dropdown-toggle nav__item-link hospital">Hospitals</a>
-                                <ul class="dropdown-menu">
+                                <a href="{{route('location.by.hospital')}}"
+                                    class="nav__item-link">All Hospitals</a>
+                                {{-- <ul class="dropdown-menu">
                                     @php
                                         $hospitals = hospital();
                                     @endphp
@@ -144,7 +146,7 @@
                                         </li><!-- /.nav-item -->
                                     @endforeach
 
-                                </ul><!-- /.dropdown-menu -->
+                                </ul><!-- /.dropdown-menu --> --}}
                             </li><!-- /.nav-item -->
                             <li class="nav__item">
                                 <a href="{{ route('contact') }}" class="nav__item-link">Contacts</a>
@@ -207,10 +209,10 @@
                                     first and best
                                     choice for your family healthcare.
                                 </p>
-                                <a href="{{ route('appointment_page') }}"
+                                {{-- <a href="{{ route('appointment_page') }}"
                                     class="btn btn__primary btn__primary-style2 btn__link">
                                     <span>Make Appointment</span> <i class="icon-arrow-right"></i>
-                                </a>
+                                </a> --}}
                             </div><!-- /.footer-widget__content -->
                         </div><!-- /.col-xl-2 -->
                         <div class="col-sm-6 col-md-6 col-lg-2 offset-lg-1">
